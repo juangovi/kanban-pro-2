@@ -19,7 +19,7 @@ function App() {
 
   const [mostrarContraseña, setmostrarContraseña] = useState(false);
 
-  const handelContraseña = (valor) => {
+  const handleContraseña = (valor) => {
     setmostrarContraseña(valor);
   }
 
@@ -39,7 +39,7 @@ function App() {
       <div className='bg-white flex-1 flex flex-col justify-center items-center'>
         <div className="mb-8">
           <h1 className="font-bold text-3xl uppercase">bienvenido de vuelta</h1>
-          <p className="mt-2 text-gray-600">introduce tus credenciales para haceder a su centro de trabajo</p>
+          <p className="mt-2 text-gray-600">introduce tus credenciales para acceder a su centro de trabajo</p>
         </div>
         <div className="flex gap-4 mb-8 w-full max-w-md"> 
           <button className="flex-1 flex items-center justify-center gap-2 h-12 px-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors duration-200">
@@ -69,13 +69,13 @@ function App() {
           buscarUsuario(credenciales.email, credenciales.password);
         }} className="w-full max-w-md space-y-6 mb-8">
           <div>
-            <label htmlFor="email" className="block text-sm font-bold">Direcion de correo</label>
+            <label htmlFor="email" className="block text-sm font-bold">Dirección de correo</label>
             <input className="w-full h-14 px-4 bg-background-light border border-gray-100 rounded-lg focus:ring-2 focus:ring-green-600/20 focus:border-green-600 outline-none transition-all duration-200 text-[#101d0c] placeholder:text-gray-400" placeholder="name@company.com" type="email" key="email" value={credenciales.email} onChange={(e) => setCredenciales({...credenciales, email: e.target.value})}>
             </input>
           </div>
           <div className='relative'> {/* //TODO:  cambiar icono */}
             <label htmlFor="password" className="block text-sm font-bold">Contraseña</label>
-            <a onClick={() => {handelContraseña(!mostrarContraseña)} } className='absolute right-4 top-9 hover:text-green-600 cursor-pointer'>👁️</a>
+            <a onClick={() => {handleContraseña(!mostrarContraseña)} } className='absolute right-4 top-9 hover:text-green-600 cursor-pointer'>👁️</a>
             <input type={mostrarContraseña ? "text" : "password"} key="password" className="w-full h-14 px-4 bg-background-light border border-gray-100 rounded-lg focus:ring-2 focus:ring-green-600/20 focus:border-green-600 outline-none transition-all duration-200 text-[#101d0c] placeholder:text-gray-400" placeholder="********" value={credenciales.password} onChange={(e) => setCredenciales({...credenciales, password: e.target.value})}/>
           </div>
           <div>
