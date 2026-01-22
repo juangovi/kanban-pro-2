@@ -1,20 +1,33 @@
  import { useState } from 'react'
-
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from './firebaseConfig';
 
 function App() {
 
   const [credenciales, setCredenciales] = useState({
     email: '',
     password: ''
+  })
+
+  const buscarUsuario = async (email, password) => {
+    const q = query(collection(db, "usuarios"), where("email", "==", email),where("password", "==", password));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+    });
   }
 
-  )
+  const [mostrarContraseña, setmostrarContraseña] = useState(false);
+
+  const handelContraseña = (valor) => {
+    setmostrarContraseña(valor);
+  }
 
  
   return (
     <div className='flex w-full h-screen'>
       <div className='bg-[#0c1a0a] flex-1 '>
-        <div className="h-full flex flex-col mx-25 mt-50 max-w-md text-white">
+        <div className="flex flex-col mx-25 mt-50 max-w-md text-white">
           <h1 className="uppercase font-bold text-5xl mb-4">Domina tu flujo de <br /><span className="text-green-600">trabajo</span></h1>
           <p className="text-gray-300 text-2xl">una plataforma todo en uno para administrar tus proyectos, tareas y equipos de manera eficiente</p>
         </div>
@@ -51,18 +64,22 @@ function App() {
             <span className="px-4 bg-white text-gray-400">o continua con email</span>
           </div>
         </div>
-        <form className="w-full max-w-md space-y-6 mb-8">
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          buscarUsuario(credenciales.email, credenciales.password);
+        }} className="w-full max-w-md space-y-6 mb-8">
           <div>
             <label htmlFor="email" className="block text-sm font-bold">Direcion de correo</label>
-            <input className="w-full h-14 px-4 bg-background-light border border-gray-100 rounded-lg focus:ring-2 focus:ring-green-600/20 focus:border-green-600 outline-none transition-all duration-200 text-[#101d0c] placeholder:text-gray-400" placeholder="name@company.com" type="email" id="email" value={credenciales.email} onChange={(e) => setCredenciales({...credenciales, email: e.target.value})}>
+            <input className="w-full h-14 px-4 bg-background-light border border-gray-100 rounded-lg focus:ring-2 focus:ring-green-600/20 focus:border-green-600 outline-none transition-all duration-200 text-[#101d0c] placeholder:text-gray-400" placeholder="name@company.com" type="email" key="email" value={credenciales.email} onChange={(e) => setCredenciales({...credenciales, email: e.target.value})}>
             </input>
           </div>
-          <div>
+          <div className='relative'> {/* //TODO:  cambiar icono */}
             <label htmlFor="password" className="block text-sm font-bold">Contraseña</label>
-            <input type="password" id="password" className="w-full h-14 px-4 bg-background-light border border-gray-100 rounded-lg focus:ring-2 focus:ring-green-600/20 focus:border-green-600 outline-none transition-all duration-200 text-[#101d0c] placeholder:text-gray-400" placeholder="********" value={credenciales.password} onChange={(e) => setCredenciales({...credenciales, password: e.target.value})}/>
+            <a onClick={() => {handelContraseña(!mostrarContraseña)} } className='absolute right-4 top-9 hover:text-green-600 cursor-pointer'>👁️</a>
+            <input type={mostrarContraseña ? "text" : "password"} key="password" className="w-full h-14 px-4 bg-background-light border border-gray-100 rounded-lg focus:ring-2 focus:ring-green-600/20 focus:border-green-600 outline-none transition-all duration-200 text-[#101d0c] placeholder:text-gray-400" placeholder="********" value={credenciales.password} onChange={(e) => setCredenciales({...credenciales, password: e.target.value})}/>
           </div>
           <div>
-           <button className="uppercase w-full h-14 bg-green-600 text-white font-bold rounded-lg shadow-lg shadow-primary/20 hover:bg-green-600/90 transition-all active:scale-[0.98]" type="submit">
+           <button className="uppercase w-full h-14 bg-green-600 text-white font-bold rounded-lg shadow-lg shadow-primary/20 hover:bg-green-600/90 transition-all active:scale-[0.98]" type='submit'>
               entrar
             </button>
           </div>
