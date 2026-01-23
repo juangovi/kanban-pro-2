@@ -1,8 +1,8 @@
-import { SingIn } from "./pages/SingIn.jsx";
+import { SignIn } from "./pages/SignIn.jsx";
 
 function App() {
   return (<>
-      <SingIn></SingIn>
+      <SignIn></SignIn>
     </>
   )
  

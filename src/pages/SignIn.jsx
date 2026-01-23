@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebaseConfig.js';
 import { signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 
-function SingIn() {
+function SignIn() {
 
   const [credenciales, setCredenciales] = useState({
     email: '',
@@ -137,4 +137,4 @@ const signUpWithEmailAndPassword = async () => {
     </div>
   )}
 
-export { SingIn }
+export { SignIn }
