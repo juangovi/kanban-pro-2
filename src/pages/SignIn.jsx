@@ -2,8 +2,11 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebaseConfig.js';
 import { signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
-
+import SignUp from '../components/SignUp.jsx';
+import { InputComponent } from '../components/formsComponents/InputComponent.jsx';
 function SignIn() {
+
+  const [modalOpen, setModalOpen] = useState(false);
 
   const [credenciales, setCredenciales] = useState({
     email: '',
@@ -45,13 +48,6 @@ const signUpWithEmailAndPassword = async () => {
     console.error('Error al registrar el usuario:', error);
   }
 };
-  
-
-  const [mostrarContraseña, setmostrarContraseña] = useState(false);
-
-  const handleContraseña = (valor) => {
-    setmostrarContraseña(valor);
-  }
 
  
   return (
@@ -99,28 +95,9 @@ const signUpWithEmailAndPassword = async () => {
           signUpWithEmailAndPassword();
         }} className="w-full max-w-md space-y-6 mb-8">
           <div>
-            <label htmlFor="email" className="block text-sm font-bold dark:text-white">Dirección de correo</label>
-            <input className="w-full h-14 px-4 bg-background-light border border-gray-100 dark:border-gray-700 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-green-600/20 focus:border-green-600 outline-none transition-all duration-200 text-[#101d0c] placeholder:text-gray-400" placeholder="name@company.com" type="email" key="email" value={credenciales.email} onChange={(e) => setCredenciales({...credenciales, email: e.target.value})}>
-            </input>
+            <InputComponent label='Correo electronico' placeholder="name@company.com" type="email" value={credenciales.email} onChange={(e) => setCredenciales({...credenciales, email: e.target.value})}/>
           </div>
-          <div className='relative'>
-            <div className='flex justify-between'>
-              <label htmlFor="password" className="block text-sm font-bold dark:text-white">Contraseña</label>
-              <a className='text-green-600 font-bold hover:underline' href="">¿olvidaste la Contraseña?</a>
-            </div>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 cursor-pointer absolute right-4 top-9 dark:text-white hover:text-green-600" onClick={() => {handleContraseña(!mostrarContraseña)} }>
-              {mostrarContraseña ?
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-                  : 
-                <>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                </>
-              }     
-            </svg>
-
-            <input type={mostrarContraseña ? "text" : "password"} key="password" className="dark:border-gray-700 dark:bg-gray-700 dark:text-white w-full h-14 px-4 bg-background-light border border-gray-100 rounded-lg focus:ring-2 focus:ring-green-600/20 focus:border-green-600 outline-none transition-all duration-200 text-[#101d0c] placeholder:text-gray-400" placeholder={mostrarContraseña ? "Contraseña" : "••••••••••"} value={credenciales.password} onChange={(e) => setCredenciales({...credenciales, password: e.target.value})}/>
-          </div>
+          <InputComponent indrec={true} label='Contraseña' placeholder='Contraseña' type='password' value={credenciales.password} onChange={(e) => setCredenciales({...credenciales, password: e.target.value})}/>
           <div>
            <button className="uppercase w-full h-14 bg-green-600 text-white font-bold rounded-lg shadow-lg shadow-primary/20 hover:bg-green-600/90 transition-all active:scale-[0.98]" type='submit'>
               entrar
@@ -130,10 +107,11 @@ const signUpWithEmailAndPassword = async () => {
         <div>
           <p className="text-gray-500">
             ¿no tienes una cuenta?
-            <a className="text-green-600 font-bold ml-1 hover:underline" href="#">registrate gratis</a>
+            <a onClick={() => setModalOpen(true)} className="text-green-600 font-bold ml-1 hover:underline" href="#">registrate gratis</a>
           </p>
         </div>
       </div>
+      <SignUp isOpen={modalOpen} onClose={() => setModalOpen(false)}/>
     </div>
   )}
 
