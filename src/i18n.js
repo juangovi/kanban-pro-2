@@ -8,7 +8,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: "en",
+    fallbackLng: "es",
     debug: false,
     detection: {
       // Orden en el que buscará el idioma

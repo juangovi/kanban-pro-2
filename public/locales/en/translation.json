@@ -7,5 +7,16 @@
     "credentialsDescription": "Enter your credentials to access your workspace",
     "continueWithEmail": "or continue with email",
     "noAccount": "Don't have an account?",
-    "freeSignUp": "Sign up for free"
+    "freeSignUp": "Sign up for free",
+    "emailplaceholder": "Enter your email",
+    "passwordplaceholder": "Enter your password",
+    "forgotPassword": "Forgot password?",
+    "email": "Email address",
+    "password": "Password",
+    "enter": "Sign in",
+    "signUpTitle": "Create your account",
+    "signUpDescription": "Enter your credentials to sign up",
+    "completeName": "Full name",
+    "passwordConfirmation": "Confirm password",
+    "createAccount": "Create account"
 }

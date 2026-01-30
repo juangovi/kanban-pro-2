@@ -7,5 +7,16 @@
     "credentialsDescription": "introduce tus credenciales para acceder a su centro de trabajo",
     "continueWithEmail": "o continua con email",
     "noAccount": "¿No tienes una cuenta?",
-    "freeSignUp": "Regístrate gratis"
+    "freeSignUp": "Regístrate gratis",
+    "emailplaceholder": "Introduce tu email",
+    "passwordplaceholder": "Introduce tu contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "enter": "entrar",
+    "signUpTitle": "Crea tu cuenta",
+    "signUpDescription": "introduce tus credenciales para registrate",
+    "completeName": "Nombre completo",
+    "passwordConfirmation": "Confirmar Contraseña",
+    "createAccount": "Crear cuenta"
 }

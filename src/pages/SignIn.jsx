@@ -58,10 +58,10 @@ const signUpWithEmailAndPassword = async () => {
           e.preventDefault();
           signUpWithEmailAndPassword();
         }} className="w-full max-w-md mb-8">
-            <InputComponent label='Correo electronico' placeholder="name@company.com" type="email" value={credenciales.email} onChange={(e) => setCredenciales({...credenciales, email: e.target.value})}></InputComponent>
-            <InputComponent showPasswordRecovery={true} label='Contraseña' placeholder='Contraseña' type='password' value={credenciales.password} onChange={(e) => setCredenciales({...credenciales, password: e.target.value})}/>
+            <InputComponent label={t("email")} placeholder={t("emailplaceholder")} type="email" value={credenciales.email} onChange={(e) => setCredenciales({...credenciales, email: e.target.value})}></InputComponent>
+            <InputComponent showPasswordRecovery={true} label={t("password")} placeholder={t("passwordplaceholder")} type='password' value={credenciales.password} onChange={(e) => setCredenciales({...credenciales, password: e.target.value})}/>
            <button className="uppercase w-full h-14 bg-green-600 text-white font-bold rounded-lg shadow-lg shadow-primary/20 hover:bg-green-600/90 transition-all active:scale-[0.98]" type='submit'>
-              entrar
+              {t("enter")}
             </button>
         </form>
         <div>
