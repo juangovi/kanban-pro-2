@@ -4,6 +4,7 @@ import SignUp from '../components/SignUp.jsx';
 import { InputComponent } from '../components/formsComponents/InputComponent.jsx';
 import { LoginButtons } from '../components/formsComponents/LoginButtons.jsx';
 
+import { EnvelopeIcon, LockClosedIcon } from '@heroicons/react/24/outline';
 import { useTranslation } from "react-i18next";
 
 export const SignIn = () => {
@@ -19,12 +20,12 @@ export const SignIn = () => {
 
 
 
- 
+
   return (
     <div className='flex w-full h-screen'>
       <a href='https://github.com/juangovi' className='absolute bottom-20 hidden dark:text-white dark:border-white/20 dark:bg-white/10 md:flex bg-black/10 border-black/20 left-20 lg:bg-white/10 backdrop-blur-md border lg:border-white/20 rounded-full px-4 py-3 items-center gap-3 w-fit hover:bg-white/20 transition-all cursor-pointer'>
-          <img src='https://avatars.githubusercontent.com/u/65275993?v=4&size=64' alt='jagovi' className='w-10 h-10 rounded-full object-cover' />
-          <span className='lg:text-white text-sm font-medium'>{t("createBy")}</span>
+        <img src='https://avatars.githubusercontent.com/u/65275993?v=4&size=64' alt='jagovi' className='w-10 h-10 rounded-full object-cover' />
+        <span className='lg:text-white text-sm font-medium'>{t("createBy")}</span>
       </a>
       <div className='bg-[#0c1a0a] flex-1 hidden lg:block'>
         <div className="flex flex-col mx-25 mt-50 max-w-md text-white">
@@ -49,11 +50,11 @@ export const SignIn = () => {
         <form onSubmit={(e) => {
           e.preventDefault();
         }} className="w-full max-w-md mb-8">
-            <InputComponent label={t("email")} placeholder={t("emailplaceholder")} type="email" value={credenciales.email} onChange={(e) => setCredenciales({...credenciales, email: e.target.value})}></InputComponent>
-            <InputComponent showPasswordRecovery={true} label={t("password")} placeholder={t("passwordplaceholder")} type='password' value={credenciales.password} onChange={(e) => setCredenciales({...credenciales, password: e.target.value})}/>
-           <button className="uppercase w-full h-14 bg-green-600 text-white font-bold rounded-lg shadow-lg shadow-primary/20 hover:bg-green-600/90 transition-all active:scale-[0.98]" type='submit'>
-              {t("enter")}
-            </button>
+          <InputComponent Icon={EnvelopeIcon} label={t("email")} placeholder={t("emailplaceholder")} type="email" value={credenciales.email} onChange={(e) => setCredenciales({ ...credenciales, email: e.target.value })}></InputComponent>
+          <InputComponent Icon={LockClosedIcon} showPasswordRecovery={true} label={t("password")} placeholder={t("passwordplaceholder")} type='password' value={credenciales.password} onChange={(e) => setCredenciales({ ...credenciales, password: e.target.value })} />
+          <button className="uppercase w-full h-14 bg-green-600 text-white font-bold rounded-lg shadow-lg shadow-primary/20 hover:bg-green-600/90 transition-all active:scale-[0.98]" type='submit'>
+            {t("enter")}
+          </button>
         </form>
         <div>
           <p className="text-gray-500">
@@ -62,8 +63,9 @@ export const SignIn = () => {
           </p>
         </div>
       </div>
-      <SignUp isOpen={modalOpen} onClose={() => setModalOpen(false)}/>
+      <SignUp isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
-  )}
+  )
+}
 
 export default SignIn;

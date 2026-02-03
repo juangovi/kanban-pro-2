@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import CloseIcon from '@mui/icons-material/Close';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 
 
 export const InfoToast = ({ message, onClose, type }) => {
@@ -27,7 +27,7 @@ export const InfoToast = ({ message, onClose, type }) => {
     <div className={`animate-slideDown ${getBgColor()} text-white px-6 py-3 rounded-lg shadow-lg flex items-center justify-between mb-3`}>
       <span>{message}</span>
       <button onClick={onClose} className="ml-4">
-        <CloseIcon className="text-sm" />
+        <XMarkIcon className="size-5" />
       </button>
     </div>
   );
