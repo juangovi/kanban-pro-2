@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { createUserWithEmailAndPassword } from "firebase/auth";
+
 import SignUp from '../components/SignUp.jsx';
 import { InputComponent } from '../components/formsComponents/InputComponent.jsx';
 import { LoginButtons } from '../components/formsComponents/LoginButtons.jsx';
-import { auth } from '../firebaseConfig.js';
+
 import { useTranslation } from "react-i18next";
 
 export const SignIn = () => {
@@ -17,15 +17,7 @@ export const SignIn = () => {
     password: ''
   })
 
-const signUpWithEmailAndPassword = async () => {
-  try {
-    const userCredential = await createUserWithEmailAndPassword(auth, credenciales.email, credenciales.password);
-    const user = userCredential.user;
-    console.log('Usuario registrado:', user);
-  } catch (error) {
-    console.error('Error al registrar el usuario:', error);
-  }
-};
+
 
  
   return (
@@ -56,7 +48,6 @@ const signUpWithEmailAndPassword = async () => {
         </div>
         <form onSubmit={(e) => {
           e.preventDefault();
-          signUpWithEmailAndPassword();
         }} className="w-full max-w-md mb-8">
             <InputComponent label={t("email")} placeholder={t("emailplaceholder")} type="email" value={credenciales.email} onChange={(e) => setCredenciales({...credenciales, email: e.target.value})}></InputComponent>
             <InputComponent showPasswordRecovery={true} label={t("password")} placeholder={t("passwordplaceholder")} type='password' value={credenciales.password} onChange={(e) => setCredenciales({...credenciales, password: e.target.value})}/>
