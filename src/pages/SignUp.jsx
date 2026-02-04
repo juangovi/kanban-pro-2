@@ -7,6 +7,9 @@ import { auth } from '../firebaseConfig.js';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useTranslation } from "react-i18next";
 import { updateProfile } from "firebase/auth";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+
+
 
 export const SignUp = ({ isOpen, onClose }) => {
   const { t } = useTranslation();
@@ -35,8 +38,11 @@ export const SignUp = ({ isOpen, onClose }) => {
 
 
   return (
-    <div onClick={() => onClose()} className="fixed flex items-center justify-center w-full h-screen  backdrop-blur-sm dark:text-white">
-      <div className='w-full max-w-120 flex flex-col px-15 py-5 bg-[#28283d] rounded-3xl' onClick={(e) => e.stopPropagation()}>
+    <div onClick={() => onClose()} className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm overflow-y-auto bg-black/40">
+      <div className='relative w-full max-w-md flex flex-col px-6 py-8 md:px-12 bg-white dark:bg-[#28283d] rounded-3xl shadow-xl my-auto' onClick={(e) => e.stopPropagation()}>
+        <button onClick={() => onClose()} className="absolute top-4 right-4 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-200 transition-colors">
+          <XMarkIcon className="w-8 h-8" />
+        </button>
         <div className='mb-8'>
           <h1 className="font-bold text-3xl uppercase dark:text-white">{t("signUpTitle")}</h1>
           <p className="mt-2 text-gray-600 dark:text-gray-300">{t("signUpDescription")}</p>
@@ -47,7 +53,7 @@ export const SignUp = ({ isOpen, onClose }) => {
             <div className="w-full border-t border-gray-100 dark:border-gray-700"></div>
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="px-4 bg-white dark:bg-gray-800 text-gray-400 dark:text-gray-300">{t("continueWithEmail")}</span>
+            <span className="px-4 bg-white dark:bg-[#28283d] text-gray-400 dark:text-gray-300">{t("continueWithEmail")}</span>
           </div>
         </div>
         <form action="" onSubmit={(e) => {
