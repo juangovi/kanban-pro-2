@@ -1,12 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 
 export const InfoToast = ({ message, onClose, type }) => {
+  const [isExiting, setIsExiting] = useState(false);
+
+  const handleClose = () => {
+    setIsExiting(true);
+    setTimeout(onClose, 300);
+  };
+
   useEffect(() => {
-    const timer = setTimeout(onClose, 4000); // Desaparece en 4 segundos
+    const timer = setTimeout(handleClose, 4000);
     return () => clearTimeout(timer);
-  }, [onClose]);
+  }, []);
 
   const getBgColor = () => {
     switch (type) {
@@ -24,9 +31,9 @@ export const InfoToast = ({ message, onClose, type }) => {
   };
 
   return (
-    <div className={`animate-slideDown ${getBgColor()} text-white px-6 py-3 rounded-lg shadow-lg flex items-center justify-between mb-3`}>
+    <div className={`${isExiting ? 'animate-slideUp' : 'animate-slideDown'} ${getBgColor()} text-white px-6 py-3 rounded-lg shadow-lg flex items-center justify-between pointer-events-auto min-w-64 max-w-sm`}>
       <span>{message}</span>
-      <button onClick={onClose} className="ml-4">
+      <button onClick={handleClose} className="ml-4">
         <XMarkIcon className="size-5" />
       </button>
     </div>
