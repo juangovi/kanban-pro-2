@@ -1,10 +1,12 @@
 import { SignIn } from "./pages/SignIn.jsx";
+import { InfoProvider } from "./providers/InfoProvide.jsx";
 import './i18n';
 
 function App() {
-  return (<>
+  return (
+    <InfoProvider>
       <SignIn></SignIn>
-    </>
+    </InfoProvider>
   )
  
   }
