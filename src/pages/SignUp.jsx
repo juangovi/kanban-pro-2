@@ -8,11 +8,14 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useTranslation } from "react-i18next";
 import { updateProfile } from "firebase/auth";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useInfo } from '../providers/InfoProvide.jsx';
 
 
 
 export const SignUp = ({ isOpen, onClose }) => {
   const { t } = useTranslation();
+
+  const { addMessage } = useInfo();
 
   const [credentials, setcredentials] = useState({
     nombre: '',
@@ -21,6 +24,42 @@ export const SignUp = ({ isOpen, onClose }) => {
     passwordConfirmation: ''
   });
 
+  const [errores, setErrores] = useState({
+    nombre: false,
+    email: false,
+    password: false,
+    passwordConfirmation: false
+  });
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    const nombreVacio = credentials.nombre === '';
+    const emailVacio = credentials.email === '';
+    const passwordVacia = credentials.password === '';
+    const passwordConfirmationVacia = credentials.passwordConfirmation === '';
+
+    if (nombreVacio || emailVacio || passwordVacia || passwordConfirmationVacia) {
+      setErrores({ nombre: nombreVacio, email: emailVacio, password: passwordVacia, passwordConfirmation: passwordConfirmationVacia });
+      addMessage(t("completeFields"), "error");
+      return;
+    }
+    const emailInvalido = !credentials.email.includes("@");
+    const passwordCorta = credentials.password.length < 8;
+    const passwordConfirmationInvalida = credentials.password !== credentials.passwordConfirmation;
+
+    if (emailInvalido || passwordCorta || passwordConfirmationInvalida) {
+      setErrores({ email: emailInvalido, password: passwordCorta, passwordConfirmation: passwordConfirmationInvalida });
+      if (emailInvalido) addMessage(t("emailInvalid"), "error");
+      else if (passwordCorta) addMessage(t("passwordInvalid"), "error");
+      else if (passwordConfirmationInvalida) addMessage(t("passwordConfirmationInvalid"), "error");
+
+      return;
+    }
+
+    setErrores({ nombre: false, email: false, password: false, passwordConfirmation: false });
+    signUpWithEmailAndPassword();
+  }
+
   const signUpWithEmailAndPassword = async () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, credentials.email, credentials.password);
@@ -28,9 +67,17 @@ export const SignUp = ({ isOpen, onClose }) => {
       await updateProfile(userCredential.user, {
         displayName: credentials.nombre
       });
-      console.log('Usuario registrado:', user);
+      addMessage(t("userCreated"), "success");
     } catch (error) {
-      console.error('Error al registrar el usuario:', error);
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          addMessage(t("emailAlreadyInUse"), "error");
+          setErrores({ ...errores, email: true });
+          break;
+        default:
+          addMessage(t("error"), "error");
+          break;
+      }
     }
   };
 
@@ -59,13 +106,13 @@ export const SignUp = ({ isOpen, onClose }) => {
           </div>
           <form action="" onSubmit={(e) => {
             e.preventDefault();
-            signUpWithEmailAndPassword();
+            handleSignUp(e);
           }} className="w-full mb-8">
             <div>
-              <InputComponent Icon={UserIcon} label={t("completeName")} placeholder={t("completeName")} type="text" value={credentials.nombre} onChange={(e) => setcredentials({ ...credentials, nombre: e.target.value })} />
-              <InputComponent Icon={EnvelopeIcon} label={t("email")} placeholder={t("emailplaceholder")} type="email" value={credentials.email} onChange={(e) => setcredentials({ ...credentials, email: e.target.value })} />
-              <InputComponent Icon={LockClosedIcon} label={t("password")} placeholder={t("passwordplaceholder")} type="password" value={credentials.password} onChange={(e) => setcredentials({ ...credentials, password: e.target.value })} />
-              <InputComponent Icon={ShieldCheckIcon} label={t("passwordConfirmation")} placeholder={t("passwordConfirmation")} type="password" value={credentials.passwordConfirmation} onChange={(e) => setcredentials({ ...credentials, passwordConfirmation: e.target.value })} />
+              <InputComponent error={errores.nombre} Icon={UserIcon} label={t("completeName")} placeholder={t("completeName")} type="text" value={credentials.nombre} onChange={(e) => { setcredentials({ ...credentials, nombre: e.target.value }); setErrores({ ...errores, nombre: false }); }} />
+              <InputComponent error={errores.email} Icon={EnvelopeIcon} label={t("email")} placeholder={t("emailplaceholder")} type="email" value={credentials.email} onChange={(e) => { setcredentials({ ...credentials, email: e.target.value }); setErrores({ ...errores, email: false }); }} />
+              <InputComponent error={errores.password} Icon={LockClosedIcon} label={t("password")} placeholder={t("passwordplaceholder")} type="password" value={credentials.password} onChange={(e) => { setcredentials({ ...credentials, password: e.target.value }); setErrores({ ...errores, password: false }); }} />
+              <InputComponent error={errores.passwordConfirmation} Icon={ShieldCheckIcon} label={t("passwordConfirmation")} placeholder={t("passwordConfirmation")} type="password" value={credentials.passwordConfirmation} onChange={(e) => { setcredentials({ ...credentials, passwordConfirmation: e.target.value }); setErrores({ ...errores, passwordConfirmation: false }); }} />
               <button className="uppercase w-full h-14 bg-green-600 text-white font-bold rounded-lg shadow-lg shadow-primary/20 hover:bg-green-600/90 transition-all active:scale-[0.98]" type='submit'>
                 {t("createAccount")}
               </button>

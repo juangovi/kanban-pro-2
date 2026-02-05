@@ -18,5 +18,14 @@
     "signUpDescription": "Enter your credentials to sign up",
     "completeName": "Full name",
     "passwordConfirmation": "Confirm password",
-    "createAccount": "Create account"
+    "createAccount": "Create account",
+    "completeFields": "Please complete all fields",
+    "emailInvalid": "Please enter a valid email",
+    "passwordInvalid": "Please enter a valid password",
+    "passwordConfirmationInvalid": "Passwords do not match",
+    "userCreated": "User created successfully",
+    "error": "Error creating user",
+    "emailAlreadyInUse": "Email already in use",
+    "errorLogin": "Error logging in",
+    "unexpectedError": "An unexpected error occurred"
 }

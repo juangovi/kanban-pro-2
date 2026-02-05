@@ -18,5 +18,14 @@
     "signUpDescription": "introduce tus credenciales para registrate",
     "completeName": "Nombre completo",
     "passwordConfirmation": "Confirmar Contraseña",
-    "createAccount": "Crear cuenta"
+    "createAccount": "Crear cuenta",
+    "completeFields": "Por favor, complete todos los campos",
+    "emailInvalid": "Por favor, introduce un email válido",
+    "passwordInvalid": "Por favor, introduce una contraseña válida",
+    "passwordConfirmationInvalid": "Las contraseñas no coinciden",
+    "userCreated": "Usuario creado correctamente",
+    "error": "Error al crear el usuario",
+    "emailAlreadyInUse": "El email ya está en uso",
+    "errorLogin": "Error al iniciar sesión",
+    "unexpectedError": "Ocurrió un error inesperado"
 }
