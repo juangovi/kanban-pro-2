@@ -27,5 +27,7 @@
     "error": "Error creating user",
     "emailAlreadyInUse": "Email already in use",
     "errorLogin": "Error logging in",
-    "unexpectedError": "An unexpected error occurred"
+    "unexpectedError": "An unexpected error occurred",
+    "emailVerificationSent": "Email verification sent, please verify your email to continue",
+    "popupClosed": "Popup closed"
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { useTranslation } from "react-i18next";
-import { useInfo } from '../../providers/InfoProvide.jsx';
+import { useInfo } from '../../providers/InfoProvider.jsx';
 
 
 export const InputComponent = ({

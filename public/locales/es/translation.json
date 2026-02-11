@@ -27,5 +27,7 @@
     "error": "Error al crear el usuario",
     "emailAlreadyInUse": "El email ya está en uso",
     "errorLogin": "Error al iniciar sesión",
-    "unexpectedError": "Ocurrió un error inesperado"
+    "unexpectedError": "Ocurrió un error inesperado",
+    "emailVerificationSent": "Correo electrónico de verificación enviado, por favor verifica tu correo electrónico para continuar",
+    "popupClosed": "La ventana emergente se cerró"
 }
