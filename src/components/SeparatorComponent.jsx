@@ -12,3 +12,5 @@ export const SeparatorComponent = ({ text }) => {
         </div>
     );
 };
+
+export default SeparatorComponent;

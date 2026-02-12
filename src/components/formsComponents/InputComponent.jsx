@@ -14,7 +14,10 @@ export const InputComponent = ({
   showPasswordRecovery = false,
   Icon,
   error = false,
+  onPasswordRecoveryClick,
 }) => {
+
+
 
   const { addMessage } = useInfo();
 
@@ -34,7 +37,7 @@ export const InputComponent = ({
       <div className='flex justify-between'>
         <label htmlFor={label} className="block text-sm font-bold dark:text-white">{label}</label>
         {showPasswordRecovery &&
-          <span onClick={() => addMessage("Recuperación de contraseña solicitada", "info")} className='hidden sm:flex text-green-600 text-sm font-bold hover:underline'>{t("forgotPassword")}</span>
+          <a onClick={onPasswordRecoveryClick} className='hidden sm:flex text-green-600 text-sm font-bold hover:underline cursor-pointer'>{t("forgotPassword")}</a>
         }
       </div>
       {Icon && (

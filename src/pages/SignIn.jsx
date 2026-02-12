@@ -1,20 +1,23 @@
-import { useState, useRef } from 'react'
+import { useState, lazy, Suspense } from 'react'
 
-import SignUp from './SignUp.jsx';
-import { InputComponent } from '../components/formsComponents/InputComponent.jsx';
-import { LoginButtons } from '../components/formsComponents/LoginButtons.jsx';
-import { BotonComponent } from '../components/formsComponents/BotonComponent.jsx';
-import { SeparatorComponent } from '../components/SeparatorComponent.jsx';
+import InputComponent from '../components/formsComponents/InputComponent.jsx';
+import LoginButtons from '../components/formsComponents/LoginButtons.jsx';
+import BotonComponent from '../components/formsComponents/BotonComponent.jsx';
+import SeparatorComponent from '../components/SeparatorComponent.jsx';
+import LoadingComponent from '../components/LoadingComponent.jsx';
 
 import { EnvelopeIcon, LockClosedIcon } from '@heroicons/react/24/outline';
 import { useTranslation } from "react-i18next";
 import { useAuth } from '../hooks/useAuth.js';
 
+const PasswordReset = lazy(() => import('../pages/PasswordReset.jsx'));
+const SignUp = lazy(() => import('../pages/SignUp.jsx'));
 
 export const SignIn = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [signUpModal, setSignUpModal] = useState(false);
   const { t } = useTranslation();
   const { handleLogin, credenciales, setCredenciales, errores, setErrores } = useAuth();
+  const [showPasswordReset, setShowPasswordReset] = useState(false);
 
 
   return (
@@ -45,13 +48,13 @@ export const SignIn = () => {
             <InputComponent error={errores.password} Icon={LockClosedIcon} showPasswordRecovery={true} label={t("password")} placeholder={t("passwordplaceholder")} type='password' value={credenciales.password} onChange={(e) => {
               setCredenciales({ ...credenciales, password: e.target.value });
               setErrores({ ...errores, password: false });
-            }} />
+            }} onPasswordRecoveryClick={() => setShowPasswordReset(true)} />
             <BotonComponent type="submit" text={t("enter")} />
           </form>
           <div className="text-center">
             <p className="text-gray-500">
               {t("noAccount")}
-              <a onClick={() => setModalOpen(true)} className="text-green-600 font-bold ml-1 hover:underline" href="#">{t("freeSignUp")}</a>
+              <a onClick={() => setSignUpModal(true)} className="text-green-600 font-bold ml-1 hover:underline" href="#">{t("freeSignUp")}</a>
             </p>
           </div>
         </div>
@@ -60,7 +63,10 @@ export const SignIn = () => {
           <span className='text-sm font-medium'>{t("createBy")}</span>
         </a>
       </div>
-      <SignUp isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+      <Suspense fallback={<LoadingComponent />}>
+        {signUpModal && <SignUp isOpen={signUpModal} onClose={() => setSignUpModal(false)} />}
+        {showPasswordReset && <PasswordReset isOpen={showPasswordReset} onClose={() => setShowPasswordReset(false)} />}
+      </Suspense>
     </div>
   )
 }

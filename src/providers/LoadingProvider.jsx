@@ -1,6 +1,7 @@
 //provider de bloqueo de pantalla de carga
 
 import { createContext, useContext, useState } from 'react';
+import LoadingComponent from '../components/LoadingComponent.jsx';
 
 const LoadingContext = createContext(); // creamos el contexto
 
@@ -12,9 +13,7 @@ export const LoadingProvider = ({ children }) => {
         <LoadingContext.Provider value={{ loading, setLoading }}> {/* pasamos el valor al contexto */}
             {children}
             {loading && (
-                <div className='fixed inset-0 z-100 flex items-center justify-center p-4 backdrop-blur-sm bg-black/40 pointer-events-auto'>
-                    <div className="w-16 h-16 border-4 border-green-600 border-t-transparent rounded-full animate-spin"></div>
-                </div>
+                <LoadingComponent />
             )}
         </LoadingContext.Provider>
     );

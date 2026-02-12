@@ -1,11 +1,10 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { GoogleAuthProvider, GithubAuthProvider, signInWithPopup } from "firebase/auth";
-import { createUserWithEmailAndPassword, updateProfile, sendEmailVerification } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
 
-export const loginWithEmail = async (email, password, setLoading, addMessage, t) => {
+export const loginWithEmail = async (email, password, setLoading, addMessage, t, setErrores) => {
     try {
-        console.log("hola");
         setLoading(true);
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
@@ -13,19 +12,13 @@ export const loginWithEmail = async (email, password, setLoading, addMessage, t)
     } catch (error) {
         switch (error.code) {
             case 'auth/invalid-credential':
-                addMessage(t("errorLogin"), "error");
-                break;
+            case 'auth/too-many-requests':
             case 'auth/user-not-found':
-                addMessage(t("errorLogin"), "error");
-                break;
             case 'auth/wrong-password':
                 addMessage(t("errorLogin"), "error");
-                break;
-            case 'auth/too-many-requests':
-                addMessage(t("errorLogin"), "error");
+                setErrores({ email: true, password: true });
                 break;
             default:
-                console.log(error);
                 addMessage(t("unexpectedError"), "error");
         }
     } finally {
@@ -93,10 +86,32 @@ export const signUpWithEmailAndPassword = async (setLoading, addMessage, t, cred
         switch (error.code) {
             case "auth/email-already-in-use":
                 addMessage(t("emailAlreadyInUse"), "error");
-                setErroresSignUp({ ...erroresSignUp, email: true });
+                setErroresSignUp(erroresSignUp => ({ ...erroresSignUp, email: true }));
                 break;
             default:
-                addMessage(t("error"), "error");
+                addMessage(t("unexpectedError"), "error");
+                console.log(error);
+                break;
+        }
+    } finally {
+        setLoading(false);
+    }
+};
+
+export const passwordReset = async (setLoading, addMessage, t, credentials, onClose, setErroresPasswordReset) => {
+    try {
+        setLoading(true);
+        await sendPasswordResetEmail(auth, credentials.email);
+        addMessage(t("passwordResetSent"), "info", "long");
+        onClose();
+    } catch (error) {
+        switch (error.code) {
+            case "auth/user-not-found":
+                addMessage(t("userNotFound"), "error");
+                setErroresPasswordReset(erroresPasswordReset => ({ ...erroresPasswordReset, email: true }));
+                break;
+            default:
+                addMessage(t("unexpectedError"), "error");
                 console.log(error);
                 break;
         }

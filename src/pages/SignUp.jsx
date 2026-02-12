@@ -14,8 +14,7 @@ import { useInfo } from '../providers/InfoProvider.jsx';
 export const SignUp = ({ isOpen, onClose }) => {
   const { t } = useTranslation();
   const { handleSignUp, credentials, setcredentials, erroresSignUp, setErroresSignUp } = useAuth();
-  const { setLoading } = useLoading();
-  const { addMessage } = useInfo();
+
 
 
 
@@ -39,7 +38,6 @@ export const SignUp = ({ isOpen, onClose }) => {
           <LoginButtons></LoginButtons>
           <SeparatorComponent text={t("continueWithEmail")} />
           <form action="" onSubmit={(e) => {
-            e.preventDefault();
             handleSignUp(e, onClose);
           }} className="w-full mb-8">
             <div>

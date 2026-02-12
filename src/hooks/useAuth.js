@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLoading } from "../providers/LoadingProvider";
 import { useInfo } from "../providers/InfoProvider";
-import { loginWithEmail, signUpWithGoogle, signUpWithGithub, signUpWithEmailAndPassword } from "../services/authService";
+import { loginWithEmail, signUpWithGoogle, signUpWithGithub, signUpWithEmailAndPassword, passwordReset } from "../services/authService";
 import { useTranslation } from "react-i18next";
 
 
@@ -19,6 +19,14 @@ export const useAuth = () => {
         email: false,
         password: false,
         passwordConfirmation: false
+    });
+
+    const [erroresPasswordReset, setErroresPasswordReset] = useState({
+        email: false
+    });
+
+    const [credentialsPasswordReset, setCredentialsPasswordReset] = useState({
+        email: ''
     });
 
 
@@ -58,7 +66,7 @@ export const useAuth = () => {
         }
 
         setErrores({ email: false, password: false });
-        loginWithEmail(credenciales.email, credenciales.password, setLoading, addMessage, t);
+        loginWithEmail(credenciales.email, credenciales.password, setLoading, addMessage, t, setErrores);
     }
 
     const handleSignUpWithGoogle = async () => {
@@ -103,6 +111,27 @@ export const useAuth = () => {
         signUpWithEmailAndPassword(setLoading, addMessage, t, credentials, onClose, setErroresSignUp);
     }
 
+    const handlePasswordReset = (e, onClose) => {
+        e.preventDefault();
+        const emailVacio = credentialsPasswordReset.email === '';
+
+        if (emailVacio) {
+            setErroresPasswordReset({ email: emailVacio });
+            addMessage(t("completeFields"), "error");
+            return;
+        }
+        const emailInvalido = !credentialsPasswordReset.email.includes("@");
+
+        if (emailInvalido) {
+            setErroresPasswordReset({ email: emailInvalido });
+            addMessage(t("emailInvalid"), "error");
+            return;
+        }
+
+        setErroresPasswordReset({ email: false });
+        passwordReset(setLoading, addMessage, t, credentialsPasswordReset, onClose, setErroresPasswordReset);
+    }
+
     return {
         handleLogin,
         credenciales,
@@ -115,6 +144,11 @@ export const useAuth = () => {
         credentials,
         setcredentials,
         erroresSignUp,
-        setErroresSignUp
+        setErroresSignUp,
+        handlePasswordReset,
+        credentialsPasswordReset,
+        setCredentialsPasswordReset,
+        erroresPasswordReset,
+        setErroresPasswordReset
     }
 }

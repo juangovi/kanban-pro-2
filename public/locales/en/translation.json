@@ -26,8 +26,13 @@
     "userCreated": "User created successfully",
     "error": "Error creating user",
     "emailAlreadyInUse": "Email already in use",
-    "errorLogin": "Error logging in",
+    "errorLogin": "Invalid credentials",
     "unexpectedError": "An unexpected error occurred",
     "emailVerificationSent": "Email verification sent, please verify your email to continue",
-    "popupClosed": "Popup closed"
+    "popupClosed": "Popup closed",
+    "passwordResetTitle": "Reset password",
+    "passwordResetDescription": "Enter your email address to reset your password",
+    "sendPasswordReset": "reset password",
+    "passwordResetSent": "Password reset email sent, please verify your email to continue",
+    "userNotFound": "User not found"
 }

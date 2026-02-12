@@ -7,3 +7,5 @@ export const BotonComponent = ({ type, text }) => {
         </button>
     );
 };
+
+export default BotonComponent;

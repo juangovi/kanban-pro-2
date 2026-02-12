@@ -26,8 +26,13 @@
     "userCreated": "Usuario creado correctamente",
     "error": "Error al crear el usuario",
     "emailAlreadyInUse": "El email ya está en uso",
-    "errorLogin": "Error al iniciar sesión",
+    "errorLogin": "Credenciales invalidas",
     "unexpectedError": "Ocurrió un error inesperado",
     "emailVerificationSent": "Correo electrónico de verificación enviado, por favor verifica tu correo electrónico para continuar",
-    "popupClosed": "La ventana emergente se cerró"
+    "popupClosed": "La ventana emergente se cerró",
+    "passwordResetTitle": "Restablecer contraseña",
+    "passwordResetDescription": "Introduce tu correo electrónico para restablecer tu contraseña",
+    "sendPasswordReset": "restablecer contraseña",
+    "passwordResetSent": "Correo electrónico de restablecimiento de contraseña enviado, por favor verifica tu correo electrónico para continuar",
+    "userNotFound": "Usuario no encontrado"
 }
