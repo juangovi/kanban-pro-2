@@ -13,8 +13,12 @@ import { useInfo } from '../providers/InfoProvider.jsx';
 
 export const SignUp = ({ isOpen, onClose }) => {
   const { t } = useTranslation();
-  const { handleSignUp, credentials, setcredentials, erroresSignUp, setErroresSignUp } = useAuth();
+  const { state, dispatch, handleSignUp } = useAuth();
 
+  const handleChange = (e) => {
+    dispatch({ type: 'UPDATE_FIELD', field: e.target.name, value: e.target.value });
+    dispatch({ type: 'SET_ERRORS_SIGNUP', payload: { ...state.signUpErrors, [e.target.name]: false } });
+  }
 
 
 
@@ -41,10 +45,10 @@ export const SignUp = ({ isOpen, onClose }) => {
             handleSignUp(e, onClose);
           }} className="w-full mb-8">
             <div>
-              <InputComponent error={erroresSignUp.nombre} Icon={UserIcon} label={t("completeName")} placeholder={t("completeName")} type="text" value={credentials.nombre} onChange={(e) => { setcredentials({ ...credentials, nombre: e.target.value }); setErroresSignUp({ ...erroresSignUp, nombre: false }); }} />
-              <InputComponent error={erroresSignUp.email} Icon={EnvelopeIcon} label={t("email")} placeholder={t("emailplaceholder")} type="email" value={credentials.email} onChange={(e) => { setcredentials({ ...credentials, email: e.target.value }); setErroresSignUp({ ...erroresSignUp, email: false }); }} />
-              <InputComponent error={erroresSignUp.password} Icon={LockClosedIcon} label={t("password")} placeholder={t("passwordplaceholder")} type="password" value={credentials.password} onChange={(e) => { setcredentials({ ...credentials, password: e.target.value }); setErroresSignUp({ ...erroresSignUp, password: false }); }} />
-              <InputComponent error={erroresSignUp.passwordConfirmation} Icon={ShieldCheckIcon} label={t("passwordConfirmation")} placeholder={t("passwordConfirmation")} type="password" value={credentials.passwordConfirmation} onChange={(e) => { setcredentials({ ...credentials, passwordConfirmation: e.target.value }); setErroresSignUp({ ...erroresSignUp, passwordConfirmation: false }); }} />
+              <InputComponent name="name" error={state.signUpErrors.name} Icon={UserIcon} label={t("completeName")} placeholder={t("completeName")} type="text" value={state.auth.name} onChange={handleChange} />
+              <InputComponent name="email" error={state.signUpErrors.email} Icon={EnvelopeIcon} label={t("email")} placeholder={t("emailplaceholder")} type="text" value={state.auth.email} onChange={handleChange} />
+              <InputComponent name="password" error={state.signUpErrors.password} Icon={LockClosedIcon} label={t("password")} placeholder={t("passwordplaceholder")} type="password" value={state.auth.password} onChange={handleChange} />
+              <InputComponent name="passwordConfirmation" error={state.signUpErrors.passwordConfirmation} Icon={ShieldCheckIcon} label={t("passwordConfirmation")} placeholder={t("passwordConfirmation")} type="password" value={state.auth.passwordConfirmation} onChange={handleChange} />
               <BotonComponent type="submit" text={t("createAccount")} />
             </div>
           </form>

@@ -14,9 +14,13 @@ const PasswordReset = lazy(() => import('../pages/PasswordReset.jsx'));
 const SignUp = lazy(() => import('../pages/SignUp.jsx'));
 
 export const SignIn = () => {
+  const handleChange = (e) => {
+    dispatch({ type: 'UPDATE_FIELD', field: e.target.name, value: e.target.value });
+    dispatch({ type: 'SET_ERRORS_LOGIN', payload: { ...state.loginErrors, [e.target.name]: false } });
+  }
   const [signUpModal, setSignUpModal] = useState(false);
   const { t } = useTranslation();
-  const { handleLogin, credenciales, setCredenciales, errores, setErrores } = useAuth();
+  const { handleLogin, state, dispatch } = useAuth();
   const [showPasswordReset, setShowPasswordReset] = useState(false);
 
 
@@ -41,14 +45,8 @@ export const SignIn = () => {
           <LoginButtons></LoginButtons>
           <SeparatorComponent text={t("continueWithEmail")} />
           <form onSubmit={(e) => handleLogin(e)} className="w-full mb-8">
-            <InputComponent error={errores.email} Icon={EnvelopeIcon} label={t("email")} placeholder={t("emailplaceholder")} type="text" value={credenciales.email} onChange={(e) => {
-              setCredenciales({ ...credenciales, email: e.target.value });
-              setErrores({ ...errores, email: false });
-            }}></InputComponent>
-            <InputComponent error={errores.password} Icon={LockClosedIcon} showPasswordRecovery={true} label={t("password")} placeholder={t("passwordplaceholder")} type='password' value={credenciales.password} onChange={(e) => {
-              setCredenciales({ ...credenciales, password: e.target.value });
-              setErrores({ ...errores, password: false });
-            }} onPasswordRecoveryClick={() => setShowPasswordReset(true)} />
+            <InputComponent name="email" error={state.loginErrors.email} Icon={EnvelopeIcon} label={t("email")} placeholder={t("emailplaceholder")} type="text" value={state.auth.email} onChange={handleChange}></InputComponent>
+            <InputComponent name="password" error={state.loginErrors.password} Icon={LockClosedIcon} showPasswordRecovery={true} label={t("password")} placeholder={t("passwordplaceholder")} type='password' value={state.auth.password} onChange={handleChange} onPasswordRecoveryClick={() => setShowPasswordReset(true)} />
             <BotonComponent type="submit" text={t("enter")} />
           </form>
           <div className="text-center">

@@ -9,8 +9,12 @@ import { useAuth } from '../hooks/useAuth.js';
 
 export const PasswordReset = ({ isOpen, onClose }) => {
     const { t } = useTranslation();
-    const { handlePasswordReset, credentialsPasswordReset, setCredentialsPasswordReset, erroresPasswordReset, setErroresPasswordReset } = useAuth();
+    const { state, dispatch, handlePasswordReset } = useAuth();
 
+    const handleChange = (e) => {
+        dispatch({ type: 'UPDATE_FIELD', field: e.target.name, value: e.target.value });
+        dispatch({ type: 'SET_ERRORS_PASSWORD_RESET', payload: { ...state.passwordResetErrors, [e.target.name]: false } });
+    }
 
 
 
@@ -33,7 +37,7 @@ export const PasswordReset = ({ isOpen, onClose }) => {
                     </div>
                     <form action="" onSubmit={(e) => handlePasswordReset(e, onClose)} className="w-full mb-8">
                         <div>
-                            <InputComponent error={erroresPasswordReset.email} Icon={EnvelopeIcon} label={t("email")} placeholder={t("emailplaceholder")} type="email" value={credentialsPasswordReset.email} onChange={(e) => { setCredentialsPasswordReset({ ...credentialsPasswordReset, email: e.target.value }); setErroresPasswordReset({ ...erroresPasswordReset, email: false }); }} />
+                            <InputComponent name="email" error={state.passwordResetErrors.email} Icon={EnvelopeIcon} label={t("email")} placeholder={t("emailplaceholder")} type="email" value={state.auth.email} onChange={handleChange} />
                             <BotonComponent type="submit" text={t("sendPasswordReset")} />
                         </div>
                     </form>
