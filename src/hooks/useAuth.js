@@ -5,8 +5,10 @@ import { loginWithEmail, signUpWithGoogle, signUpWithGithub, signUpWithEmailAndP
 import { useTranslation } from "react-i18next";
 import authReducer from "../reducers/authReducer";
 import { initialState } from "../reducers/authReducer";
+import * as z from "zod";
 
 export const useAuth = () => {
+
 
     const [state, dispatch] = useReducer(authReducer, initialState);
 
@@ -14,29 +16,41 @@ export const useAuth = () => {
     const { setLoading } = useLoading();
     const { addMessage } = useInfo();
 
+    const loginSchema = z.object({
+        email: z.email(t("emailInvalid")),
+        password: z.string().min(8, t("passwordInvalid")),
+    });
+
+    const signUpSchema = z.object({
+        name: z.string().min(3, t("nameInvalid")),
+        email: z.email(t("emailInvalid")),
+        password: z.string().min(8, t("passwordInvalid")),
+        passwordConfirmation: z.string().min(8, t("passwordConfirmationInvalid")),
+    }).refine((data) => data.password === data.passwordConfirmation, {
+        message: t("passwordConfirmationInvalid"),
+        path: ["passwordConfirmation"],
+    });
+
+    const passwordResetSchema = z.object({
+        email: z.email(t("emailInvalid")),
+    });
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        const emailVacio = state.auth.email === '';
-        const passwordVacia = state.auth.password === '';
 
-        if (emailVacio || passwordVacia) {
-            dispatch({ type: 'SET_ERRORS_LOGIN', payload: { email: emailVacio, password: passwordVacia } });
+        const result = loginSchema.safeParse(state.auth);
+
+        if (!result.success) {
+            const newErrors = {};
             addMessage(t("completeFields"), "error");
-            return;
-        }
-        const emailInvalido = !state.auth.email.includes("@");
-        const passwordCorta = state.auth.password.length < 8;
-
-        if (emailInvalido || passwordCorta) {
-            dispatch({ type: 'SET_ERRORS_LOGIN', payload: { email: emailInvalido, password: passwordCorta } });
-            if (emailInvalido) addMessage(t("emailInvalid"), "error");
-            else if (passwordCorta) addMessage(t("passwordInvalid"), "error");
-
+            result.error.issues.forEach(issue => {
+                newErrors[issue.path[0]] = issue.message;
+            });
+            dispatch({ type: 'SET_ERRORS_LOGIN', payload: newErrors });
             return;
         }
 
-        dispatch({ type: 'SET_ERRORS_LOGIN', payload: { email: false, password: false } });
+        dispatch({ type: 'SET_ERRORS_LOGIN', payload: { email: "", password: "" } });
         try {
             const user = await loginWithEmail(state.auth.email, state.auth.password);
             if (user) {
@@ -49,7 +63,7 @@ export const useAuth = () => {
                 case 'auth/user-not-found':
                 case 'auth/wrong-password':
                     addMessage(t("errorLogin"), "error");
-                    dispatch({ type: 'SET_ERRORS_LOGIN', payload: { email: true, password: true } });
+                    dispatch({ type: 'SET_ERRORS_LOGIN', payload: { email: t("emailInvalid"), password: t("passwordInvalid") } });
                     break;
                 default:
                     addMessage(t("unexpectedError"), "error");
@@ -101,30 +115,19 @@ export const useAuth = () => {
 
     const handleSignUp = async (e, onClose) => {
         e.preventDefault();
-        const nombreVacio = state.auth.nombre === '';
-        const emailVacio = state.auth.email === '';
-        const passwordVacia = state.auth.password === '';
-        const passwordConfirmationVacia = state.auth.passwordConfirmation === '';
 
-        if (nombreVacio || emailVacio || passwordVacia || passwordConfirmationVacia) {
-            dispatch({ type: 'SET_ERRORS_SIGNUP', payload: { nombre: nombreVacio, email: emailVacio, password: passwordVacia, passwordConfirmation: passwordConfirmationVacia } });
+        const result = signUpSchema.safeParse(state.auth);
+
+        if (!result.success) {
+            const newErrors = {};
             addMessage(t("completeFields"), "error");
+            result.error.issues.forEach(issue => {
+                newErrors[issue.path[0]] = issue.message;
+            });
+            dispatch({ type: 'SET_ERRORS_SIGNUP', payload: newErrors });
             return;
         }
-        const emailInvalido = !state.auth.email.includes("@");
-        const passwordCorta = state.auth.password.length < 8;
-        const passwordConfirmationInvalida = state.auth.password !== state.auth.passwordConfirmation;
-
-        if (emailInvalido || passwordCorta || passwordConfirmationInvalida) {
-            dispatch({ type: 'SET_ERRORS_SIGNUP', payload: { email: emailInvalido, password: passwordCorta, passwordConfirmation: passwordConfirmationInvalida } });
-            if (emailInvalido) addMessage(t("emailInvalid"), "error");
-            else if (passwordCorta) addMessage(t("passwordInvalid"), "error");
-            else if (passwordConfirmationInvalida) addMessage(t("passwordConfirmationInvalid"), "error");
-
-            return;
-        }
-
-        dispatch({ type: 'SET_ERRORS_SIGNUP', payload: { nombre: false, email: false, password: false, passwordConfirmation: false } });
+        dispatch({ type: 'SET_ERRORS_SIGNUP', payload: { nombre: "", email: "", password: "", passwordConfirmation: "" } });
         try {
             setLoading(true);
             await signUpWithEmailAndPassword(state.auth);
@@ -148,25 +151,23 @@ export const useAuth = () => {
 
     const handlePasswordReset = async (e, onClose) => {
         e.preventDefault();
-        const emailVacio = state.auth.email === '';
 
-        if (emailVacio) {
-            dispatch({ type: 'SET_ERRORS_PASSWORD_RESET', payload: { ...state.passwordResetErrors, email: emailVacio } });
+        const result = passwordResetSchema.safeParse(state.auth);
+
+        if (!result.success) {
+            const newErrors = {};
             addMessage(t("completeFields"), "error");
+            result.error.issues.forEach(issue => {
+                newErrors[issue.path[0]] = issue.message;
+            });
+            dispatch({ type: 'SET_ERRORS_PASSWORD_RESET', payload: newErrors });
             return;
         }
-        const emailInvalido = !state.auth.email.includes("@");
-
-        if (emailInvalido) {
-            dispatch({ type: 'SET_ERRORS_PASSWORD_RESET', payload: { ...state.passwordResetErrors, email: emailInvalido } });
-            addMessage(t("emailInvalid"), "error");
-            return;
-        }
-
-        dispatch({ type: 'SET_ERRORS_PASSWORD_RESET', payload: { ...state.passwordResetErrors, email: false } });
+        dispatch({ type: 'SET_ERRORS_PASSWORD_RESET', payload: { email: "" } });
         try {
             setLoading(true);
             await passwordReset(state.auth);
+            addMessage(t("passwordResetSent"), "info");
             onClose();
         } catch (error) {
             switch (error.code) {

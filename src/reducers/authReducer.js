@@ -1,8 +1,8 @@
 export const initialState = {
     auth: { name: '', email: '', password: '', passwordConfirmation: '' },
-    loginErrors: { email: false, password: false },
-    signUpErrors: { name: false, email: false, password: false, passwordConfirmation: false },
-    passwordResetErrors: { email: false },
+    loginErrors: { email: "", password: "" },
+    signUpErrors: { name: "", email: "", password: "", passwordConfirmation: "" },
+    passwordResetErrors: { email: "" },
     loading: false
 };
 
