@@ -3,8 +3,8 @@ import { useState, lazy, Suspense } from 'react'
 import InputComponent from '../components/formsComponents/InputComponent.jsx';
 import LoginButtons from '../components/formsComponents/LoginButtons.jsx';
 import BotonComponent from '../components/formsComponents/BotonComponent.jsx';
-import SeparatorComponent from '../components/SeparatorComponent.jsx';
-import LoadingComponent from '../components/LoadingComponent.jsx';
+import SeparatorComponent from '../components/utilsComponents/SeparatorComponent.jsx';
+import LoadingComponent from '../components/utilsComponents/LoadingComponent.jsx';
 
 import { EnvelopeIcon, LockClosedIcon } from '@heroicons/react/24/outline';
 import { useTranslation } from "react-i18next";

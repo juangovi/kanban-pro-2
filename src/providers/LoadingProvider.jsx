@@ -1,7 +1,7 @@
 //provider de bloqueo de pantalla de carga
 
 import { createContext, useContext, useState } from 'react';
-import LoadingComponent from '../components/LoadingComponent.jsx';
+import LoadingComponent from '../components/utilsComponents/LoadingComponent.jsx';
 
 const LoadingContext = createContext(); // creamos el contexto
 
