@@ -11,10 +11,7 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const { addMessage } = useInfo();
 
-    const value = useMemo(() => ({
-        user,
-        loading
-    }), [user, loading]);
+
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -34,6 +31,10 @@ export const AuthProvider = ({ children }) => {
         return unsubscribe;
     }, []);
 
+    const value = useMemo(() => ({
+        user: user,
+        loading: loading
+    }), [user, loading]);
     return (
         <AuthContext.Provider value={value}>
             {children}

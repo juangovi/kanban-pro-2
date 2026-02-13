@@ -3,13 +3,13 @@ import { useAuthSession } from "./AuthProvider";
 import LoadingComponent from "../components/utilsComponents/LoadingComponent";
 
 export const ProtectedRoute = ({ children }) => {
-    const { value } = useAuthSession();
+    const { user, loading } = useAuthSession();
 
-    if (value.loading) {
+    if (loading) {
         return <LoadingComponent />;
     }
 
-    if (!value.user) {
+    if (!user) {
         return <Navigate to="/signin" replace />;
     }
 
