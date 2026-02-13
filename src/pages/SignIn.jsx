@@ -16,7 +16,7 @@ const SignUp = lazy(() => import('../pages/SignUp.jsx'));
 export const SignIn = () => {
   const handleChange = (e) => {
     dispatch({ type: 'UPDATE_FIELD', field: e.target.name, value: e.target.value });
-    dispatch({ type: 'SET_ERRORS_LOGIN', payload: { ...state.loginErrors, [e.target.name]: false } });
+    dispatch({ type: 'SET_ERRORS_LOGIN', payload: { ...state.loginErrors, [e.target.name]: "" } });
   }
   const [signUpModal, setSignUpModal] = useState(false);
   const { t } = useTranslation();

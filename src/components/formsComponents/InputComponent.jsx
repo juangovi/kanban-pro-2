@@ -13,14 +13,10 @@ export const InputComponent = ({
   label = '',
   showPasswordRecovery = false,
   Icon,
-  error = false,
+  error = "",
   onPasswordRecoveryClick,
   name,
 }) => {
-
-
-
-  const { addMessage } = useInfo();
 
   const { t } = useTranslation();
 
@@ -61,6 +57,9 @@ export const InputComponent = ({
       <input name={name} onBlur={() => setmostrarIcono(false)} onFocus={() => setmostrarIcono(true)} id={label} type={typeInput} className={`${type === 'password' ? "pr-15" : ""} ${Icon ? "pl-13" : ""} ${error ? "border-red-500" : "border-gray-200 dark:border-gray-700"} dark:bg-gray-700 dark:text-white w-full h-14 px-4 bg-background-light border rounded-lg focus:ring-2 focus:ring-green-600/20 focus:border-green-600 outline-none transition-all duration-200 text-[#101d0c] placeholder:text-gray-400`} placeholder={placeholderInput} value={value} onChange={onChange} />
       {showPasswordRecovery && (
         <a className='sm:hidden text-green-600 font-bold hover:underline' href="">{t("forgotPassword")}</a>
+      )}
+      {error && (
+        <p className='text-red-500 text-sm'>{error}</p>
       )}
     </div>
   );
