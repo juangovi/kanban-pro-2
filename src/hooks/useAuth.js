@@ -5,10 +5,12 @@ import { loginWithEmail, signUpWithGoogle, signUpWithGithub, signUpWithEmailAndP
 import { useTranslation } from "react-i18next";
 import authReducer from "../reducers/authReducer";
 import { initialState } from "../reducers/authReducer";
+import { useNavigate } from "react-router-dom";
 import * as z from "zod";
 
 export const useAuth = () => {
 
+    const navigate = useNavigate();
 
     const [state, dispatch] = useReducer(authReducer, initialState);
 
@@ -53,8 +55,10 @@ export const useAuth = () => {
         dispatch({ type: 'SET_ERRORS_LOGIN', payload: { email: "", password: "" } });
         try {
             const user = await loginWithEmail(state.auth.email, state.auth.password);
-            if (user) {
-                addMessage(t("userCreated"), "success");
+            if (user?.emailVerified) {
+                navigate("/");
+            } else {
+                addMessage(t("emailVerificationSent"), "info");
             }
         } catch (error) {
             switch (error.code) {
@@ -66,6 +70,7 @@ export const useAuth = () => {
                     dispatch({ type: 'SET_ERRORS_LOGIN', payload: { email: t("emailInvalid"), password: t("passwordInvalid") } });
                     break;
                 default:
+                    console.log(error);
                     addMessage(t("unexpectedError"), "error");
             }
         } finally {

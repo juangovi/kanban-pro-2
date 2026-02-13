@@ -1,7 +1,7 @@
 //provider de errores global
 
 import { createContext, useContext, useCallback, useState } from 'react';
-import { InfoToast } from '../components/InfoToast.jsx';
+import { InfoToast } from '../components/utilsComponents/InfoToast.jsx';
 
 const InfoContext = createContext(); // creamos el contexto
 

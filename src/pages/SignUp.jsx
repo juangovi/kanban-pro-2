@@ -5,7 +5,7 @@ import { LoginButtons } from '../components/formsComponents/LoginButtons.jsx';
 import { useTranslation } from "react-i18next";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { BotonComponent } from '../components/formsComponents/BotonComponent.jsx';
-import { SeparatorComponent } from '../components/SeparatorComponent.jsx';
+import { SeparatorComponent } from '../components/utilsComponents/SeparatorComponent.jsx';
 import { useAuth } from '../hooks/useAuth.js';
 import { useLoading } from '../providers/LoadingProvider.jsx';
 import { useInfo } from '../providers/InfoProvider.jsx';
