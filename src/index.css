@@ -22,15 +22,12 @@
 
 /* 2. Definimos los valores por defecto (Tema Light) */
 :root {
-  --primary: #16a34a;
-  /* green-600 */
-  --secondary: #15803d;
-  /* green-700 */
+  --primary: #0c7e7e;
+  --secondary: #0c7e7e;
   --bg-main: #ffffff;
   --text-main: #1f2937;
   --text-secondary: #38414e;
-  /* gray-800 */
-  --sign-in-bg: #0c1a0a;
+  --sign-in-bg: #aba6f5;
   --bg-input: #f3f4f6;
   --bg-input-hover: #e5e7eb;
   --border-color: #cacaca;
@@ -47,6 +44,7 @@
   :root {
     --bg-main: #1a2336;
     --text-main: #f9fafb;
+    --sign-in-bg: #0c1a0a;
     --text-secondary: #bdc0c7;
     --bg-input: #364153;
     --bg-input-hover: #475569;

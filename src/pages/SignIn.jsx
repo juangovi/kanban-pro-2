@@ -27,13 +27,13 @@ export const SignIn = () => {
   return (
     <div className='flex w-full min-h-screen overflow-y-auto overflow-x-hidden'>
       <div className='bg-sign-in-bg flex-1 hidden lg:block relative'>
-        <div className="flex flex-col mx-25 mt-50 max-w-md text-white">
+        <div className="flex flex-col mx-25 mt-50 max-w-md text-ui-text">
           <h1 className="uppercase font-bold text-5xl mb-4">{t("titleInicio")} <br /><span className="text-brand-primary">{t("titleInicio2")}</span></h1>
-          <p className="text-gray-300 text-2xl">{t("subtitleInicio")}</p>
+          <p className="text-ui-text-secondary text-2xl">{t("subtitleInicio")}</p>
         </div>
         <a href='https://github.com/juangovi' target="_blank" rel="noopener noreferrer" className='absolute bottom-1/12 left-1/12 flex text-white border-white/20 bg-white/10 backdrop-blur-md border rounded-full px-4 py-3 items-center gap-3 w-fit hover:bg-white/20 transition-all cursor-pointer'>
           <img src='https://avatars.githubusercontent.com/u/65275993?v=4&size=64' alt='jagovi' className='w-10 h-10 rounded-full object-cover' />
-          <span className='text-white text-sm font-medium'>{t("createBy")}</span>
+          <span className='text-ui-text text-sm font-medium'>{t("createBy")}</span>
         </a>
       </div>
       <div className='bg-ui-bg flex-1 flex flex-col justify-center items-center px-15 lg:px-0 '>
