@@ -48,15 +48,15 @@ export const InfoToast = ({ message, onClose, type, duration = "short" }) => {
   const getBgColor = () => {
     switch (type) {
       case "error":
-        return "bg-red-500";
+        return "bg-error";
       case "success":
-        return "bg-green-500";
+        return "bg-success";
       case "info":
-        return "bg-blue-500";
+        return "bg-info";
       case "warning":
-        return "bg-yellow-500";
+        return "bg-warning";
       default:
-        return "bg-gray-500";
+        return "bg-toast";
     }
   };
   // cerrar toast con animacion

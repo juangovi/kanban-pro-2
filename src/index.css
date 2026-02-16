@@ -1,5 +1,60 @@
 @import "tailwindcss";
 
+
+
+@theme {
+  --color-brand-primary: var(--primary);
+  --color-brand-secondary: var(--secondary);
+  --color-ui-bg: var(--bg-main);
+  --color-ui-text: var(--text-main);
+  --color-sign-in-bg: var(--sign-in-bg);
+  --color-ui-text-secondary: var(--text-secondary);
+  --color-input-bg: var(--bg-input);
+  --color-input-bg-hover: var(--bg-input-hover);
+  --color-border-color: var(--border-color);
+  --color-separator: var(--separator);
+  --color-error: var(--error);
+  --color-success: var(--success);
+  --color-info: var(--info);
+  --color-warning: var(--warning);
+  --color-toast: var(--toast);
+}
+
+/* 2. Definimos los valores por defecto (Tema Light) */
+:root {
+  --primary: #16a34a;
+  /* green-600 */
+  --secondary: #15803d;
+  /* green-700 */
+  --bg-main: #ffffff;
+  --text-main: #1f2937;
+  --text-secondary: #38414e;
+  /* gray-800 */
+  --sign-in-bg: #0c1a0a;
+  --bg-input: #f3f4f6;
+  --bg-input-hover: #e5e7eb;
+  --border-color: #cacaca;
+  --separator: #d8d0d0;
+  --error: #ef4444;
+  --success: #10b981;
+  --info: #3b82f6;
+  --warning: #f59e0b;
+  --toast: #2b2b2b;
+}
+
+/* 3. Tema Dark (el estándar) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-main: #1a2336;
+    --text-main: #f9fafb;
+    --text-secondary: #bdc0c7;
+    --bg-input: #364153;
+    --bg-input-hover: #475569;
+    --border-color: #1a1a1a;
+    --separator: #5d5d66;
+  }
+}
+
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -30,17 +85,4 @@
 
 .animate-slideUp {
   animation: slideUp 0.3s ease-in forwards;
-}
-
-/* Ocultar barra en Chrome, Safari y Opera */
-::-webkit-scrollbar {
-  display: none;
-}
-
-/* Ocultar barra en IE, Edge y Firefox */
-html {
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
 }

@@ -26,9 +26,9 @@ export const SignIn = () => {
 
   return (
     <div className='flex w-full min-h-screen overflow-y-auto overflow-x-hidden'>
-      <div className='bg-[#0c1a0a] flex-1 hidden lg:block relative'>
+      <div className='bg-sign-in-bg flex-1 hidden lg:block relative'>
         <div className="flex flex-col mx-25 mt-50 max-w-md text-white">
-          <h1 className="uppercase font-bold text-5xl mb-4">{t("titleInicio")} <br /><span className="text-green-600">{t("titleInicio2")}</span></h1>
+          <h1 className="uppercase font-bold text-5xl mb-4">{t("titleInicio")} <br /><span className="text-brand-primary">{t("titleInicio2")}</span></h1>
           <p className="text-gray-300 text-2xl">{t("subtitleInicio")}</p>
         </div>
         <a href='https://github.com/juangovi' target="_blank" rel="noopener noreferrer" className='absolute bottom-1/12 left-1/12 flex text-white border-white/20 bg-white/10 backdrop-blur-md border rounded-full px-4 py-3 items-center gap-3 w-fit hover:bg-white/20 transition-all cursor-pointer'>
@@ -36,11 +36,11 @@ export const SignIn = () => {
           <span className='text-white text-sm font-medium'>{t("createBy")}</span>
         </a>
       </div>
-      <div className='bg-white dark:bg-gray-800 flex-1 flex flex-col justify-center items-center px-15 lg:px-0 '>
+      <div className='bg-ui-bg flex-1 flex flex-col justify-center items-center px-15 lg:px-0 '>
         <div>
           <div className="mb-8 w-full">
-            <h1 className="font-bold text-3xl uppercase dark:text-white">{t("welcome")}</h1>
-            <p className="mt-2 text-gray-600 dark:text-gray-300">{t("credentialsDescription")}</p>
+            <h1 className="font-bold text-3xl uppercase text-ui-text">{t("welcome")}</h1>
+            <p className="mt-2 text-ui-text-secondary">{t("credentialsDescription")}</p>
           </div>
           <LoginButtons></LoginButtons>
           <SeparatorComponent text={t("continueWithEmail")} />
@@ -50,9 +50,9 @@ export const SignIn = () => {
             <BotonComponent type="submit" text={t("enter")} />
           </form>
           <div className="text-center">
-            <p className="text-gray-500">
+            <p className="text-ui-text-secondary">
               {t("noAccount")}
-              <a onClick={() => setSignUpModal(true)} className="text-green-600 font-bold ml-1 hover:underline" href="#">{t("freeSignUp")}</a>
+              <a onClick={() => setSignUpModal(true)} className="text-brand-primary font-bold ml-1 hover:underline" href="#">{t("freeSignUp")}</a>
             </p>
           </div>
         </div>
