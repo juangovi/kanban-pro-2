@@ -25,7 +25,7 @@ export const SignIn = () => {
 
 
   return (
-    <div className='flex w-full min-h-screen overflow-scroll'>
+    <div className='flex w-full min-h-screen overflow-y-auto overflow-x-hidden'>
       <div className='bg-[#0c1a0a] flex-1 hidden lg:block relative'>
         <div className="flex flex-col mx-25 mt-50 max-w-md text-white">
           <h1 className="uppercase font-bold text-5xl mb-4">{t("titleInicio")} <br /><span className="text-green-600">{t("titleInicio2")}</span></h1>

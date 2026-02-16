@@ -30,7 +30,7 @@ export const SignUp = ({ isOpen, onClose }) => {
 
   return (
     <div onClick={() => onClose()} className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm overflow-y-auto bg-black/40">
-      <div className='relative w-full max-w-2xl flex flex-col overflow-scroll px-6 py-8 md:px-12 bg-white dark:bg-[#28283d] rounded-3xl shadow-xl my-auto' onClick={(e) => e.stopPropagation()}>
+      <div className='relative w-full max-w-2xl flex flex-col overflow-y-auto overflow-x-hidden px-6 py-8 md:px-12 bg-white dark:bg-[#28283d] rounded-3xl shadow-xl my-auto' onClick={(e) => e.stopPropagation()}>
         <button onClick={() => onClose()} className="absolute top-4 right-4 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-200 transition-colors">
           <XMarkIcon className="w-8 h-8" />
         </button>
