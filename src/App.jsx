@@ -5,13 +5,14 @@ import './i18n';
 import { Routes, Route } from 'react-router-dom'
 import { AuthProvider } from "./providers/AuthProvider";
 import { ProtectedRoute } from "./providers/ProtectedRoute";
+import { Dashboard } from "./pages/Dashboard.jsx";
 function App() {
   return (
     <InfoProvider>
       <LoadingProvider>
         <AuthProvider>
           <Routes>
-            <Route path="/" element={<ProtectedRoute><div>ruta protegida</div></ProtectedRoute>} />
+            <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/signin" element={<SignIn />} />
           </Routes>
         </AuthProvider>

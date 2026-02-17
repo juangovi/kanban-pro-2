@@ -83,7 +83,7 @@ export const useAuth = () => {
             setLoading(true);
             const user = await signUpWithGoogle();
             if (user) {
-                addMessage(t("userCreated"), "success");
+                navigate("/");
             }
         } catch (error) {
             switch (error.code) {
@@ -103,7 +103,7 @@ export const useAuth = () => {
             setLoading(true);
             const user = await signUpWithGithub();
             if (user) {
-                addMessage(t("userCreated"), "success");
+                navigate("/");
             }
         } catch (error) {
             switch (error.code) {
