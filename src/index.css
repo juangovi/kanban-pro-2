@@ -18,6 +18,7 @@
   --color-info: var(--info);
   --color-warning: var(--warning);
   --color-toast: var(--toast);
+  --color-shadow-border: var(--shadow-border);
 }
 
 /* 2. Definimos los valores por defecto (Tema Light) */
@@ -37,6 +38,7 @@
   --info: #3b82f6;
   --warning: #f59e0b;
   --toast: #2b2b2b;
+  --shadow-border: #e5e7eb;
 }
 
 /* 3. Tema Dark (el estándar) */

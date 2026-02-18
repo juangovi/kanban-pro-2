@@ -35,5 +35,10 @@
     "sendPasswordReset": "reset password",
     "passwordResetSent": "Password reset email sent, please verify your email to continue",
     "userNotFound": "User not found",
-    "nameInvalid": "Please enter a valid name"
+    "nameInvalid": "Please enter a valid name",
+    "boards": "Boards",
+    "tasks": "Tasks",
+    "calendar": "Calendar",
+    "settings": "Settings",
+    "appName": "Kanban Pro"
 }
