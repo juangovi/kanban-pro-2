@@ -40,5 +40,8 @@
     "tasks": "Tasks",
     "calendar": "Calendar",
     "settings": "Settings",
-    "appName": "Kanban Pro"
+    "appName": "Kanban Pro",
+    "newBoard": "New board",
+    "search": "Search",
+    "notifications": "Notifications"
 }

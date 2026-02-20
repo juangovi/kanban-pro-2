@@ -44,7 +44,7 @@ export const SignIn = () => {
           </div>
           <LoginButtons></LoginButtons>
           <SeparatorComponent text={t("continueWithEmail")} />
-          <form onSubmit={(e) => handleLogin(e)} className="w-full mb-8">
+          <form onSubmit={(e) => handleLogin(e)} className="w-full mb-8 flex flex-col gap-6">
             <InputComponent name="email" error={state.loginErrors.email} Icon={EnvelopeIcon} label={t("email")} placeholder={t("emailplaceholder")} type="text" value={state.auth.email} onChange={handleChange}></InputComponent>
             <InputComponent name="password" error={state.loginErrors.password} Icon={LockClosedIcon} showPasswordRecovery={true} label={t("password")} placeholder={t("passwordplaceholder")} type='password' value={state.auth.password} onChange={handleChange} onPasswordRecoveryClick={() => setShowPasswordReset(true)} />
             <BotonComponent type="submit" text={t("enter")} />

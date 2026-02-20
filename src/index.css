@@ -18,7 +18,7 @@
   --color-info: var(--info);
   --color-warning: var(--warning);
   --color-toast: var(--toast);
-  --color-shadow-border: var(--shadow-border);
+
 }
 
 /* 2. Definimos los valores por defecto (Tema Light) */
