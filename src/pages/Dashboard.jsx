@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { ViewColumnsIcon } from "@heroicons/react/24/outline";
 import { ClipboardDocumentCheckIcon } from "@heroicons/react/24/outline";
 import { CalendarIcon } from "@heroicons/react/24/outline";
@@ -11,14 +11,13 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { BellIcon } from "@heroicons/react/24/outline";
 import BotonComponent from '../components/formsComponents/BotonComponent';
-
-
-
+import Board from './Board';
 
 export const Dashboard = () => {
     const { user } = useAuthSession();
-
     const { t } = useTranslation();
+
+
 
     return (
         <div className="flex h-screen overflow-hidden">
@@ -71,9 +70,7 @@ export const Dashboard = () => {
                         </button>
                     </div>
                 </header>
-                <div className="border-2 border-dashed border-ui-text-secondary/20 h-full rounded-3xl flex items-center justify-center">
-                    el resto
-                </div>
+                <Board />
             </div>
         </div>
     );
