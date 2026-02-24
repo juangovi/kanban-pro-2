@@ -21,7 +21,7 @@ export const InfoProvider = ({ children }) => {
     return (
         <InfoContext.Provider value={{ addMessage }}> {/* pasamos el valor al contexto */}
             {children}
-            <div className="fixed top-5 inset-x-0 z-50 flex flex-col items-center pointer-events-none gap-2">
+            <div className="fixed top-5 inset-x-0 z-100 flex flex-col items-center pointer-events-none gap-2">
                 {messages.map(message => (
                     <InfoToast
                         key={message.id}

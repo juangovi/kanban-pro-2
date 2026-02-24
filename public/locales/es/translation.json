@@ -48,5 +48,6 @@
     "favoritos": "Favoritos",
     "alfabetico": "Alfabetico",
     "progreso": "Progreso",
-    "card": "Tarjeta"
+    "card": "Tarjeta",
+    "dateFormat": "dd/MM/yyyy"
 }

@@ -1,6 +1,42 @@
 @import "tailwindcss";
+@import "react-datepicker/dist/react-datepicker.css";
 
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: var(--primary) !important;
+  color: white !important;
+}
 
+/* Para el tema oscuro, cambiamos el fondo del calendario */
+.react-datepicker {
+  background-color: var(--bg-main) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-main) !important;
+  font-family: inherit !important;
+}
+
+.react-datepicker__header {
+  background-color: var(--bg-secondary) !important;
+  border-bottom: 1px solid var(--separator) !important;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name,
+.react-datepicker__day {
+  color: var(--text-main) !important;
+}
+
+.react-datepicker__day:hover {
+  background-color: var(--bg-input-hover) !important;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: var(--text-secondary) !important;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
 
 @theme {
   --color-brand-primary: var(--primary);

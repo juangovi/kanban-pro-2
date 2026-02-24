@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { useTranslation } from "react-i18next";
-import { useInfo } from '../../providers/InfoProvider.jsx';
+import DatePicker, { registerLocale } from "react-datepicker";
 
+import { es } from 'date-fns/locale/es';
+import { enUS } from 'date-fns/locale/en-US';
 
 export const InputComponent = ({
   placeholder = '',
@@ -18,8 +20,7 @@ export const InputComponent = ({
   name,
 }) => {
 
-  const { t } = useTranslation();
-
+  const { t, i18n } = useTranslation()
   const [mostrarContraseña, setmostrarContraseña] = useState(false);
 
   const [mostrarIcono, setmostrarIcono] = useState(false);
@@ -27,6 +28,9 @@ export const InputComponent = ({
   const typeInput = type === 'password' && mostrarContraseña ? 'text' : type;
 
   const placeholderInput = type === 'password' ? (mostrarContraseña ? placeholder : '••••••••••') : placeholder;
+
+  registerLocale('es-ES', es);
+  registerLocale('en-US', enUS);
 
 
   return (
@@ -38,11 +42,6 @@ export const InputComponent = ({
         }
       </div>
       <div className='relative'>
-        {Icon && (
-          <div>
-            <Icon className="size-6 absolute left-4 top-1/2 -translate-y-1/2 text-ui-text-secondary" />
-          </div>
-        )}
 
         {type === 'password' && mostrarIcono && (mostrarContraseña ?
           <EyeSlashIcon className="size-6 cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 text-ui-text-secondary hover:text-brand-primary" onMouseDown={(e) => {
@@ -58,8 +57,23 @@ export const InputComponent = ({
         {type === 'textarea' && (
           <textarea name={name} onBlur={() => setmostrarIcono(false)} onFocus={() => setmostrarIcono(true)} id={name} type={typeInput} className={`${type === 'password' ? "pr-15" : ""} ${Icon ? "pl-13" : ""} ${error ? "border-error" : "border-border-color"} bg-input-bg text-ui-text w-full h-24 px-4 border rounded-lg focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all duration-200 placeholder:text-ui-text-secondary hover:bg-input-bg-hover`} placeholder={placeholderInput} value={value} onChange={onChange} />
         )}
-        {type !== 'textarea' && (
+        {type === 'date' && (
+          <DatePicker
+            locale={i18n.language}
+            selected={value ? new Date(value) : null}
+            onChange={(date) => onChange({ target: { name, value: date } })}
+            dateFormat={t("dateFormat")}
+            placeholderText={placeholderInput}
+            customInput={<input name={name} className={`${Icon ? "pl-13" : ""} ${error ? "border-error" : "border-border-color"} bg-input-bg text-ui-text w-full h-14 px-4 border rounded-lg focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all duration-200 placeholder:text-ui-text-secondary hover:bg-input-bg-hover`} placeholder={placeholderInput} />}
+          />
+        )}
+        {type !== 'textarea' && type !== 'date' && (
           <input name={name} onBlur={() => setmostrarIcono(false)} onFocus={() => setmostrarIcono(true)} id={name} type={typeInput} className={`${type === 'password' ? "pr-15" : ""} ${Icon ? "pl-13" : ""} ${error ? "border-error" : "border-border-color"} bg-input-bg text-ui-text w-full h-14 px-4 border rounded-lg focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all duration-200 placeholder:text-ui-text-secondary hover:bg-input-bg-hover`} placeholder={placeholderInput} value={value} onChange={onChange} />
+        )}
+        {Icon && (
+          <div className="pointer-events-none">
+            <Icon className="size-6 absolute left-4 top-1/2 -translate-y-1/2 text-ui-text-secondary" />
+          </div>
         )}
       </div>
       {error && (
