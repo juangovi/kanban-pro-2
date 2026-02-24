@@ -6,17 +6,20 @@ import { Routes, Route } from 'react-router-dom'
 import { AuthProvider } from "./providers/AuthProvider";
 import { ProtectedRoute } from "./providers/ProtectedRoute";
 import { Dashboard } from "./pages/Dashboard.jsx";
+import { ModalProvider } from "./providers/ModalPrivider";
 function App() {
   return (
     <InfoProvider>
-      <LoadingProvider>
-        <AuthProvider>
-          <Routes>
-            <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/signin" element={<SignIn />} />
-          </Routes>
-        </AuthProvider>
-      </LoadingProvider>
+      <ModalProvider>
+        <LoadingProvider>
+          <AuthProvider>
+            <Routes>
+              <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+              <Route path="/signin" element={<SignIn />} />
+            </Routes>
+          </AuthProvider>
+        </LoadingProvider>
+      </ModalProvider>
     </InfoProvider>
   )
 

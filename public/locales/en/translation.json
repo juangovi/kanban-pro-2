@@ -36,12 +36,17 @@
     "passwordResetSent": "Password reset email sent, please verify your email to continue",
     "userNotFound": "User not found",
     "nameInvalid": "Please enter a valid name",
-    "boards": "Boards",
+    "boards": "Projects",
     "tasks": "Tasks",
     "calendar": "Calendar",
     "settings": "Settings",
     "appName": "Kanban Pro",
-    "newBoard": "New board",
+    "newBoard": "New project",
     "search": "Search",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "recientes": "Recientes",
+    "favoritos": "Favoritos",
+    "alfabetico": "Alfabetico",
+    "progreso": "Progreso",
+    "card": "Card"
 }

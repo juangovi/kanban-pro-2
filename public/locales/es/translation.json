@@ -36,12 +36,17 @@
     "passwordResetSent": "Correo electrónico de restablecimiento de contraseña enviado, por favor verifica tu correo electrónico para continuar",
     "userNotFound": "Usuario no encontrado",
     "nameInvalid": "Por favor, introduce un nombre válido",
-    "boards": "Tableros",
+    "boards": "Proyectos",
     "tasks": "Tareas",
     "calendar": "Calendario",
     "settings": "Configuración",
     "appName": "Kanban Pro",
-    "newBoard": "Nuevo tablero",
+    "newBoard": "Nuevo proyecto",
     "search": "Buscar",
-    "notifications": "Notificaciones"
+    "notifications": "Notificaciones",
+    "recientes": "Recientes",
+    "favoritos": "Favoritos",
+    "alfabetico": "Alfabetico",
+    "progreso": "Progreso",
+    "card": "Tarjeta"
 }

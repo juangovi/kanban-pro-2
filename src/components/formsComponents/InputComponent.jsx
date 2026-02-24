@@ -30,7 +30,7 @@ export const InputComponent = ({
 
 
   return (
-    <div className='relative'>
+    <div className='relative w-full'>
       <div className='flex justify-between'>
         <label htmlFor={label} className="block text-sm font-bold text-ui-text">{label}</label>
         {showPasswordRecovery &&
@@ -55,7 +55,12 @@ export const InputComponent = ({
             setmostrarContraseña(!mostrarContraseña);
           }} />
         )}
-        <input name={name} onBlur={() => setmostrarIcono(false)} onFocus={() => setmostrarIcono(true)} id={label} type={typeInput} className={`${type === 'password' ? "pr-15" : ""} ${Icon ? "pl-13" : ""} ${error ? "border-error" : "border-border-color"} bg-input-bg text-ui-text w-full h-14 px-4 border rounded-lg focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all duration-200 placeholder:text-ui-text-secondary hover:bg-input-bg-hover`} placeholder={placeholderInput} value={value} onChange={onChange} />
+        {type === 'textarea' && (
+          <textarea name={name} onBlur={() => setmostrarIcono(false)} onFocus={() => setmostrarIcono(true)} id={name} type={typeInput} className={`${type === 'password' ? "pr-15" : ""} ${Icon ? "pl-13" : ""} ${error ? "border-error" : "border-border-color"} bg-input-bg text-ui-text w-full h-24 px-4 border rounded-lg focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all duration-200 placeholder:text-ui-text-secondary hover:bg-input-bg-hover`} placeholder={placeholderInput} value={value} onChange={onChange} />
+        )}
+        {type !== 'textarea' && (
+          <input name={name} onBlur={() => setmostrarIcono(false)} onFocus={() => setmostrarIcono(true)} id={name} type={typeInput} className={`${type === 'password' ? "pr-15" : ""} ${Icon ? "pl-13" : ""} ${error ? "border-error" : "border-border-color"} bg-input-bg text-ui-text w-full h-14 px-4 border rounded-lg focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all duration-200 placeholder:text-ui-text-secondary hover:bg-input-bg-hover`} placeholder={placeholderInput} value={value} onChange={onChange} />
+        )}
       </div>
       {error && (
         <p className='text-error text-sm'>{error}</p>
