@@ -1,6 +1,34 @@
 @import "tailwindcss";
 @import "react-datepicker/dist/react-datepicker.css";
 
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin-block: 12px;
+  /* Margen superior e inferior para evitar que el thumb toque los bordes */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-brand-primary);
+  border-radius: 20px;
+  border: 4px solid transparent;
+  /* Crea un área de "aire" alrededor del thumb */
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-brand-secondary);
+}
+
+/* Soporte para Firefox y estándares futuros */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-brand-primary) transparent;
+}
+
 .react-datepicker__day--selected,
 .react-datepicker__day--keyboard-selected {
   background-color: var(--primary) !important;
@@ -62,7 +90,7 @@
 /* 2. Definimos los valores por defecto (Tema Light) */
 :root {
   --primary: #0c7e7e;
-  --secondary: #0c7e7e;
+  --secondary: #005f5f;
   --bg-main: #ffffff;
   --text-main: #1f2937;
   --text-secondary: #38414e;

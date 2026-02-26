@@ -55,7 +55,7 @@ export const useAuth = () => {
         dispatch({ type: 'SET_ERRORS_LOGIN', payload: { email: "", password: "" } });
         try {
             const user = await loginWithEmail(state.auth.email, state.auth.password);
-            if (user?.emailVerified) {
+            if (user) {
                 navigate("/");
             } else {
                 addMessage(t("emailVerificationSent"), "info");
@@ -91,6 +91,7 @@ export const useAuth = () => {
                     addMessage(t("popupClosed"), "error");
                     break;
                 default:
+                    console.log(error);
                     addMessage(t("unexpectedError"), "error");
             }
         } finally {
@@ -111,6 +112,7 @@ export const useAuth = () => {
                     addMessage(t("popupClosed"), "error");
                     break;
                 default:
+                    console.log(error);
                     addMessage(t("unexpectedError"), "error");
             }
         } finally {

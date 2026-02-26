@@ -18,7 +18,6 @@ export const AuthProvider = ({ children }) => {
             if (user) {
                 const isNewUser = user.metadata.creationTime === user.metadata.lastSignInTime;
                 if (!user.emailVerified && !isNewUser) {
-                    addMessage("Please verify your email address", "error");
                     auth.signOut();
                     return;
                 }

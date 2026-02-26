@@ -36,7 +36,7 @@ export const InputComponent = ({
   return (
     <div className='relative w-full'>
       <div className='flex justify-between'>
-        <label htmlFor={label} className="block text-sm font-bold text-ui-text">{label}</label>
+        <label htmlFor={name} className="block text-sm font-bold text-ui-text">{label}</label>
         {showPasswordRecovery &&
           <a onClick={onPasswordRecoveryClick} className='hidden sm:flex text-brand-primary text-sm font-bold hover:underline cursor-pointer'>{t("forgotPassword")}</a>
         }

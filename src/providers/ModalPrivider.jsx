@@ -28,12 +28,14 @@ export const ModalProvider = ({ children }) => {
         <ModalContext.Provider value={{ openModal, closeModal }}>
             {children}
             {modalConfig.isOpen && (
-                <div onClick={() => closeModal()} className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm overflow-y-auto bg-black/40 animate-slideDown">
-                    <div className='relative w-full max-w-4xl flex flex-col overflow-y-auto overflow-x-hidden px-6 py-8 md:px-12 bg-ui-bg rounded-3xl shadow-xl my-auto' onClick={(e) => e.stopPropagation()}>
-                        <button onClick={() => closeModal()} className="absolute top-4 right-4 text-ui-text hover:text-brand-primary transition-colors">
+                <div onClick={() => closeModal()} className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm bg-black/40 animate-slideDown">
+                    <div className='relative w-full max-w-4xl bg-ui-bg rounded-3xl shadow-xl overflow-hidden my-auto flex flex-col' onClick={(e) => e.stopPropagation()}>
+                        <button onClick={() => closeModal()} className="absolute top-4 right-6 z-10 text-ui-text hover:text-brand-primary transition-colors bg-ui-bg/80 backdrop-blur-md rounded-full p-1">
                             <XMarkIcon className="w-8 h-8" />
                         </button>
-                        {modalConfig.content}
+                        <div className="overflow-y-auto overflow-x-hidden max-h-[calc(100vh-5rem)] pl-6 pr-8 md:pl-12 md:pr-14 py-8">
+                            {modalConfig.content}
+                        </div>
                     </div>
                 </div>
             )}
