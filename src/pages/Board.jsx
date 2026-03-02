@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DragDropProvider } from '@dnd-kit/react';
-import { ColumComponent } from '../components/boradsComponents/ColumComponent';
-import { TaskComponent } from '../components/boradsComponents/TaskComponent';
+import { ColumnComponent } from '../components/boardComponents/ColumnComponent';
+import { TaskComponent } from '../components/boardComponents/TaskComponent';
 
 export const Board = () => {
 
@@ -92,7 +92,7 @@ export const Board = () => {
             <DragDropProvider onDragOver={handleDragEnd}>
 
                 {columns.map((column) => (
-                    <ColumComponent
+                    <ColumnComponent
                         key={column.id}
                         id={column.id}
                         title={column.title}
@@ -108,7 +108,7 @@ export const Board = () => {
                                 columnId={column.id}
                             />
                         ))}
-                    </ColumComponent>
+                    </ColumnComponent>
                 ))}
             </DragDropProvider>
         </main>

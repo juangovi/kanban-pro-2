@@ -7,7 +7,7 @@ import { CalendarIcon } from '@heroicons/react/24/outline';
 import { Cog6ToothIcon } from '@heroicons/react/24/outline';
 import ImgComponent from './utilsComponents/ImgComponent';
 
-export const SideboarComponent = () => {
+export const SidebarComponent = () => {
 
     const { user } = useAuthSession();
     const { t } = useTranslation();

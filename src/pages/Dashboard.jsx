@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 
 //import Board from './Board';
-import { SideboarComponent } from '../components/SideboarComponent';
+import { SidebarComponent } from '../components/SidebarComponent';
 import { HeadComponent } from '../components/HeadComponent';
 import { Projects } from "./Projects";
 
@@ -18,7 +18,7 @@ export const Dashboard = () => {
 
     return (
         <div className="flex h-screen overflow-hidden">
-            <SideboarComponent />
+            <SidebarComponent />
             <div className="flex-1 flex flex-col min-w-0">
                 <HeadComponent />
                 {/*<Board />*/}

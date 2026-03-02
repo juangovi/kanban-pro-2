@@ -2,7 +2,7 @@ import React from 'react';
 import { UserPlusIcon } from "@heroicons/react/24/outline";
 import InputComponent from './InputComponent';
 import { useState, useEffect } from 'react';
-import { getUsers } from '../../services/querySevice';
+import { getUsers } from '../../services/queryService';
 import ImgComponent from '../utilsComponents/ImgComponent';
 
 export const BuscadorComponent = ({ onSelectUser }) => {

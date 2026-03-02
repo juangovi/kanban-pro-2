@@ -6,7 +6,7 @@ import { Routes, Route } from 'react-router-dom'
 import { AuthProvider } from "./providers/AuthProvider";
 import { ProtectedRoute } from "./providers/ProtectedRoute";
 import { Dashboard } from "./pages/Dashboard.jsx";
-import { ModalProvider } from "./providers/ModalPrivider";
+import { ModalProvider } from "./providers/ModalProvider";
 function App() {
   return (
     <InfoProvider>

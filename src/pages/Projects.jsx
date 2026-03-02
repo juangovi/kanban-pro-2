@@ -2,8 +2,8 @@ import React from 'react';
 
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useTranslation } from 'react-i18next';
-import { ProjectCardComponent } from '../components/boradsComponents/ProjectCardComponent';
-import { useModal } from '../providers/ModalPrivider';
+import { ProjectCardComponent } from '../components/boardComponents/ProjectCardComponent';
+import { useModal } from '../providers/ModalProvider';
 import { CrearProyecto } from './CrearProyecto';
 
 export const Projects = () => {
