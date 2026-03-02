@@ -39,6 +39,7 @@ export const signUpWithGithub = async () => {
             displayName: user.displayName,
             displayNameLower: user.displayName.toLowerCase(),
             email: user.email,
+            emailLower: user.email.toLowerCase(),
             photoURL: user.photoURL,
             rol: "user",
             creacion: serverTimestamp()
@@ -64,6 +65,7 @@ export const signUpWithGoogle = async () => {
             displayName: user.displayName,
             displayNameLower: user.displayName.toLowerCase(),
             email: user.email,
+            emailLower: user.email.toLowerCase(),
             photoURL: user.photoURL,
             rol: "user",
             creacion: serverTimestamp()
@@ -83,6 +85,7 @@ export const signUpWithEmailAndPassword = async (credentials) => {
         displayName: credentials.name,
         displayNameLower: credentials.name.toLowerCase(),
         email: credentials.email,
+        emailLower: credentials.email.toLowerCase(),
         photoURL: "",
         rol: "user",
         creacion: serverTimestamp()

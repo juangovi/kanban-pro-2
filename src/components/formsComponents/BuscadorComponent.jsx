@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { getUsers } from '../../services/queryService';
 import ImgComponent from '../utilsComponents/ImgComponent';
 
-export const BuscadorComponent = ({ onSelectUser }) => {
+export const BuscadorComponent = ({ onSelectUser, error }) => {
     const [buscar, setBuscar] = useState('');
     const [usuarios, setUsuarios] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -37,7 +37,7 @@ export const BuscadorComponent = ({ onSelectUser }) => {
     };
     return (
         <div className='w-full relative'>
-            <InputComponent Icon={UserPlusIcon} label="Buscar Miembros" name="miembros" placeholder="Miembros del proyecto" type="text" value={buscar} onChange={handleChange} />
+            <InputComponent Icon={UserPlusIcon} error={error} label="Buscar Miembros" name="miembros" placeholder="Miembros del proyecto" type="text" value={buscar} onChange={handleChange} />
             {usuarios.length > 0 && (
                 <ul className="absolute top-full left-0 w-full text-ui-text bg-ui-secondary border border-border-color rounded-md shadow-lg mt-1 z-10">
                     {usuarios.map((usuario) => (
