@@ -5,7 +5,7 @@ import LoginButtons from '../components/formsComponents/LoginButtons.jsx';
 import BotonComponent from '../components/formsComponents/BotonComponent.jsx';
 import SeparatorComponent from '../components/utilsComponents/SeparatorComponent.jsx';
 import LoadingComponent from '../components/utilsComponents/LoadingComponent.jsx';
-
+import ImgComponent from '../components/utilsComponents/ImgComponent.jsx';
 import { EnvelopeIcon, LockClosedIcon } from '@heroicons/react/24/outline';
 import { useTranslation } from "react-i18next";
 import { useAuth } from '../hooks/useAuth.js';
@@ -32,7 +32,7 @@ export const SignIn = () => {
           <p className="text-ui-text-secondary text-2xl">{t("subtitleInicio")}</p>
         </div>
         <a href='https://github.com/juangovi' target="_blank" rel="noopener noreferrer" className='absolute bottom-1/12 left-1/12 flex text-white border-white/20 bg-white/10 backdrop-blur-md border rounded-full px-4 py-3 items-center gap-3 w-fit hover:bg-white/20 transition-all cursor-pointer'>
-          <img src='https://avatars.githubusercontent.com/u/65275993?v=4&size=64' alt='jagovi' className='w-10 h-10 rounded-full object-cover' />
+          <ImgComponent src='https://avatars.githubusercontent.com/u/65275993?v=4&size=64' alt='jagovi' className='w-10 h-10 rounded-full object-cover' />
           <span className='text-ui-text text-sm font-medium'>{t("createBy")}</span>
         </a>
       </div>
@@ -57,7 +57,7 @@ export const SignIn = () => {
           </div>
         </div>
         <a href='https://github.com/juangovi' target="_blank" rel="noopener noreferrer" className='mt-10 flex lg:hidden dark:text-white dark:bg-white/10 bg-black/5 border border-black/10 dark:border-white/10 backdrop-blur-md rounded-full px-4 py-2 items-center gap-3 w-fit hover:bg-black/10 transition-all cursor-pointer'>
-          <img src='https://avatars.githubusercontent.com/u/65275993?v=4&size=64' alt='jagovi' className='w-8 h-8 rounded-full object-cover' />
+          <ImgComponent src='https://avatars.githubusercontent.com/u/65275993?v=4&size=64' alt='jagovi' className='w-8 h-8 rounded-full object-cover' />
           <span className='text-sm font-medium'>{t("createBy")}</span>
         </a>
       </div>

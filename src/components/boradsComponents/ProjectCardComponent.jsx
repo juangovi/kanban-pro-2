@@ -2,6 +2,7 @@ import React from 'react';
 import { StarIcon } from "@heroicons/react/24/solid";
 import { ProgressBarComponent } from '../utilsComponents/ProgressBarComponent';
 import { useTranslation } from 'react-i18next';
+import ImgComponent from '../utilsComponents/ImgComponent';
 
 export const ProjectCardComponent = () => {
     const { t } = useTranslation();
@@ -16,8 +17,8 @@ export const ProjectCardComponent = () => {
             </div>
             <div className="mt-auto">
                 <div className="flex -space-x-2">
-                    <img className="size-7 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Team member portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChKLak0WaYj8U4bIJjL0XRIC03BmUUBqVFRmRdbU11pqgJw7TyKH-Y5382TZ4bq6iq4P3GTqzwNGaFLZl0nLyPN3wHxLxvySCt_sRwqMoxmTtedFtKuv9MTQYXZY5NXt9miL8CnpTXZLAF9ADmdbzrr-3hfd-TTaZiBInXp3Aqfnf2aNyWkAZffdWvlkmNBRCupukJceMnWijWo4Q2dA4B2VnTfu6w93x5aOrL20x1sSmYe43K_raEobOcAKgHHiievxVlK7z05A" />
-                    <img className="size-7 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Team member portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWNiTfzU4aSxgO9yRNsYEcFUkCw0K593hVeSRgPq1aVBgjdgQkePDoHEK0_CK5XR3EvPtXnrtLX0xzCORbQHGZDbgTG6H87wEklRvSCABN8lByust4uan4bxtIacdChpO2QDud0ZgnGJvGiILURSMykd-pVpn_cbzKksD-_PCcWVe6rHIZynaur_Ql9h7FxwbeUjD_CpR7qeP8GK6k_Ty-Drsj4XZNy_wgMB41RNrlKMIBOeLCFAL7hAP_GWTV7G-rN3Wuj8Vplw" />
+                    <ImgComponent className="size-7 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Team member portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChKLak0WaYj8U4bIJjL0XRIC03BmUUBqVFRmRdbU11pqgJw7TyKH-Y5382TZ4bq6iq4P3GTqzwNGaFLZl0nLyPN3wHxLxvySCt_sRwqMoxmTtedFtKuv9MTQYXZY5NXt9miL8CnpTXZLAF9ADmdbzrr-3hfd-TTaZiBInXp3Aqfnf2aNyWkAZffdWvlkmNBRCupukJceMnWijWo4Q2dA4B2VnTfu6w93x5aOrL20x1sSmYe43K_raEobOcAKgHHiievxVlK7z05A" />
+                    <ImgComponent className="size-7 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Team member portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWNiTfzU4aSxgO9yRNsYEcFUkCw0K593hVeSRgPq1aVBgjdgQkePDoHEK0_CK5XR3EvPtXnrtLX0xzCORbQHGZDbgTG6H87wEklRvSCABN8lByust4uan4bxtIacdChpO2QDud0ZgnGJvGiILURSMykd-pVpn_cbzKksD-_PCcWVe6rHIZynaur_Ql9h7FxwbeUjD_CpR7qeP8GK6k_Ty-Drsj4XZNy_wgMB41RNrlKMIBOeLCFAL7hAP_GWTV7G-rN3Wuj8Vplw" />
                 </div>
             </div>
             <button className="absolute top-5 right-5">

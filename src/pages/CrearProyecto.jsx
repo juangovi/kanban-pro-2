@@ -9,6 +9,7 @@ import BuscadorComponent from '../components/formsComponents/BuscadorComponent';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { FolderIcon } from "@heroicons/react/24/outline";
 import BotonComponent from '../components/formsComponents/BotonComponent';
+import ImgComponent from '../components/utilsComponents/ImgComponent';
 
 
 
@@ -71,7 +72,7 @@ export const CrearProyecto = () => {
                         {state.campos.miembros.map((miembro) => (
                             <div key={miembro.uid} className="flex items-center justify-between bg-ui-secondary border border-border-color rounded-md px-2 py-1">
                                 <div className='flex items-center gap-2 text-ui-text'>
-                                    <img className='w-8 h-8 rounded-full' src={miembro.photoURL} alt={miembro.displayName} />
+                                    <ImgComponent className='w-8 h-8 rounded-full' src={miembro.photoURL} alt={miembro.displayName} />
                                     <p>{miembro.displayName}</p>
                                     <p className='text-xs text-ui-text-secondary'>{miembro.email}</p>
                                 </div>

@@ -3,6 +3,7 @@ import { UserPlusIcon } from "@heroicons/react/24/outline";
 import InputComponent from './InputComponent';
 import { useState, useEffect } from 'react';
 import { getUsers } from '../../services/querySevice';
+import ImgComponent from '../utilsComponents/ImgComponent';
 
 export const BuscadorComponent = ({ onSelectUser }) => {
     const [buscar, setBuscar] = useState('');
@@ -42,7 +43,7 @@ export const BuscadorComponent = ({ onSelectUser }) => {
                     {usuarios.map((usuario) => (
                         <div key={usuario.uid} onClick={() => handleSelectUser(usuario)} className="flex items-center justify-between bg-ui-secondary border border-border-color rounded-md px-2 py-1 cursor-pointer hover:bg-ui-bg">
                             <div className='flex items-center gap-2 text-ui-text'>
-                                <img className='w-8 h-8 rounded-full' src={usuario.photoURL} alt={usuario.displayName} />
+                                <ImgComponent className='w-8 h-8 rounded-full' src={usuario.photoURL} alt={usuario.displayName} />
                                 <p>{usuario.displayName}</p>
                                 <p className='text-xs text-ui-text-secondary'>{usuario.email}</p>
                             </div>
