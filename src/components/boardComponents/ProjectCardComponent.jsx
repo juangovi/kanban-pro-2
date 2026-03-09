@@ -1,28 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StarIcon } from "@heroicons/react/24/solid";
 import { ProgressBarComponent } from '../utilsComponents/ProgressBarComponent';
 import { useTranslation } from 'react-i18next';
-import ImgComponent from '../utilsComponents/ImgComponent';
+import { UserCountComponent } from '../utilsComponents/UserCountComponent';
+import { useAuthSession } from '../../providers/AuthProvider';
+import { updateUser } from '../../services/userService';
 
-export const ProjectCardComponent = () => {
-    const { t } = useTranslation();
+export const ProjectCardComponent = ({ proyect }) => {
+    let progreso = proyect.completedTasks / proyect.tasks * 100;
+    const { user } = useAuthSession();
+    const [favorito, setFavorito] = useState(user?.proyectFav?.includes(proyect.id));
+
+    useEffect(() => {
+        setFavorito(user?.proyectFav?.includes(proyect.id));
+    }, [user]);
+
+    const handleFavorito = () => {
+        if (favorito) {
+            if (user.proyectFav) {
+                updateUser(user.uid, { proyectFav: user.proyectFav.filter((id) => id !== proyect.id) });
+            }
+        } else {
+            if (user.proyectFav) {
+                updateUser(user.uid, { proyectFav: [...user.proyectFav, proyect.id] });
+            } else {
+                updateUser(user.uid, { proyectFav: [proyect.id] });
+            }
+        }
+        setFavorito(!favorito);
+    }
+
+    if (!proyect.tasks || proyect.tasks === 0) {
+        progreso = 0;
+    }
     return (
         <div className="relative flex flex-col p-5 w-60 h-60 bg-ui-bg/70 backdrop-blur-sm rounded-lg shadow-md border border-black/5 dark:border-white/5 cursor-pointer">
-            <div className="mb-5">
-                <h1 className="text-2xl font-bold text-ui-text truncate">{t("card")}</h1>
-                <p className="text-sm text-ui-text/70 truncate">updated 2 hours ago</p>
+            <div className="mb-5 ">
+                <h1 className="text-2xl font-bold text-ui-text truncate max-w-[80%]">{proyect.nombre}</h1>
+                <p className="text-sm text-ui-text/70">
+                    updated {proyect.lastMod?.toDate ? proyect.lastMod.toDate().toLocaleDateString() : '...'}
+                </p>
             </div>
             <div className="">
-                <ProgressBarComponent progreso={60} title={"progreso"} />
+                <ProgressBarComponent progreso={progreso} title={"progreso"} />
             </div>
-            <div className="mt-auto">
-                <div className="flex -space-x-2">
-                    <ImgComponent className="size-7 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Team member portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChKLak0WaYj8U4bIJjL0XRIC03BmUUBqVFRmRdbU11pqgJw7TyKH-Y5382TZ4bq6iq4P3GTqzwNGaFLZl0nLyPN3wHxLxvySCt_sRwqMoxmTtedFtKuv9MTQYXZY5NXt9miL8CnpTXZLAF9ADmdbzrr-3hfd-TTaZiBInXp3Aqfnf2aNyWkAZffdWvlkmNBRCupukJceMnWijWo4Q2dA4B2VnTfu6w93x5aOrL20x1sSmYe43K_raEobOcAKgHHiievxVlK7z05A" />
-                    <ImgComponent className="size-7 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Team member portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWNiTfzU4aSxgO9yRNsYEcFUkCw0K593hVeSRgPq1aVBgjdgQkePDoHEK0_CK5XR3EvPtXnrtLX0xzCORbQHGZDbgTG6H87wEklRvSCABN8lByust4uan4bxtIacdChpO2QDud0ZgnGJvGiILURSMykd-pVpn_cbzKksD-_PCcWVe6rHIZynaur_Ql9h7FxwbeUjD_CpR7qeP8GK6k_Ty-Drsj4XZNy_wgMB41RNrlKMIBOeLCFAL7hAP_GWTV7G-rN3Wuj8Vplw" />
-                </div>
-            </div>
+            <UserCountComponent members={proyect.miembros} />
             <button className="absolute top-5 right-5">
-                <StarIcon className="h-6 w-6 text-ui-text-secondary hover:text-yellow-500 hover:scale-110 transition-all" />
+                <StarIcon className={`h-6 w-6 text-ui-text-secondary hover:text-yellow-500 hover:scale-110 transition-all cursor-pointer ${favorito ? "text-yellow-500" : "text-ui-text-secondary"}`} onClick={() => handleFavorito()} />
             </button>
         </div>
     );

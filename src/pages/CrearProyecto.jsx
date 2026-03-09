@@ -12,19 +12,25 @@ import BotonComponent from '../components/formsComponents/BotonComponent';
 import ImgComponent from '../components/utilsComponents/ImgComponent';
 import { getAuth } from "firebase/auth";
 import { createProyect } from '../services/proyectService';
+import { useModal } from '../providers/ModalProvider';
+import { useLoading } from '../providers/LoadingProvider';
+import { useTranslation } from 'react-i18next';
 
 
 
 
 export const CrearProyecto = () => {
+    const { closeModal } = useModal();
+    const { setLoading } = useLoading();
     const auth = getAuth();
+    const { t } = useTranslation();
     const schema = z.object({
-        nombre: z.string().min(1, "Nombre es requerido"),
+        nombre: z.string().min(1, t("requiredName")),
         fecha: z.date(),
-        descripcion: z.string().min(1, "Descripcion es requerida"),
-        miembros: z.array(z.any()).min(1, "Debe haber al menos un miembro")
+        descripcion: z.string().min(1, t("requiredDescription")),
+        miembros: z.array(z.any()).min(1, t("oneMemberRequired"))
     }).refine((data) => data.fecha >= new Date(), {
-        message: "La fecha debe ser mayor a la fecha actual",
+        message: t("dateOld"),
         path: ["fecha"],
     });
 
@@ -43,8 +49,9 @@ export const CrearProyecto = () => {
         dispatch({ type: 'change_field', payload: { name: 'miembros', value: state.campos.miembros.filter((m) => m.uid !== user.uid) } });
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         const errores = schema.safeParse(state.campos);
         if (!errores.success) {
             const newErrors = {};
@@ -52,10 +59,13 @@ export const CrearProyecto = () => {
                 newErrors[issue.path[0]] = issue.message;
             });
             dispatch({ type: 'SET_ERRORS', payload: newErrors });
+            setLoading(false);
             return;
         }
         dispatch({ type: 'SET_ERRORS', payload: initialState.errores });
-        createProyect(state.campos, auth.currentUser);
+        await createProyect(state.campos, auth.currentUser);
+        setLoading(false);
+        closeModal();
     }
 
     const initialState = {
@@ -79,19 +89,19 @@ export const CrearProyecto = () => {
 
         <div className="w-full flex-1 p-5">
             <div className='mb-5'>
-                <h1 className="text-2xl font-bold text-ui-text">Crear Proyecto</h1>
+                <h1 className="text-2xl font-bold text-ui-text">{t("createProject")}</h1>
             </div>
             <SeparatorComponent />
             <form onSubmit={handleSubmit} className='flex flex-col gap-5 '>
                 <div className='flex sm:flex-row w-full gap-5 flex-col'>
-                    <InputComponent Icon={FolderIcon} error={state.errores.nombre} label="Nombre" name="nombre" placeholder="Nombre del proyecto" value={state.campos.nombre} onChange={handleChange} />
-                    <InputComponent Icon={CalendarIcon} error={state.errores.fecha} label="Fecha limite" type='date' name="fecha" placeholder="Fecha del proyecto" value={state.campos.fecha} onChange={handleChange} />
+                    <InputComponent Icon={FolderIcon} error={state.errores.nombre} label={t("name")} name="nombre" placeholder={t("proyectName")} value={state.campos.nombre} onChange={handleChange} />
+                    <InputComponent Icon={CalendarIcon} error={state.errores.fecha} label={t("limitDate")} type='date' name="fecha" placeholder={t("proyectDate")} value={state.campos.fecha} onChange={handleChange} />
                 </div>
 
-                <InputComponent error={state.errores.descripcion} label="Descripcion" name="descripcion" placeholder="Descripcion del proyecto" type="textarea" value={state.campos.descripcion} onChange={handleChange} />
+                <InputComponent error={state.errores.descripcion} label={t("description")} name="descripcion" placeholder={t("proyectDescription")} type="textarea" value={state.campos.descripcion} onChange={handleChange} />
                 <SeparatorComponent />
                 <BuscadorComponent error={state.errores.miembros} onSelectUser={handleSelectUser} />
-                <p className="text-ui-text font-bold">Miembros:</p>
+                <p className="text-ui-text font-bold">{t("members")}:</p>
                 <SeparatorComponent />
                 {state.campos.miembros.length > 0 && (
                     <div className="flex flex-col gap-2 max-h-40 overflow-y-auto">
@@ -112,8 +122,8 @@ export const CrearProyecto = () => {
                 <SeparatorComponent />
                 <div className='flex justify-end gap-5'>
                     <div className='flex gap-5 w-full sm:w-1/2'>
-                        <BotonComponent text="Cancelar" type="button" onClick={() => dispatch({ type: 'reset' })} />
-                        <BotonComponent text="Crear Proyecto" type="submit" />
+                        <BotonComponent text={t("cancel")} type="button" onClick={closeModal} />
+                        <BotonComponent text={t("createProject")} type="submit" />
                     </div>
                 </div>
             </form>

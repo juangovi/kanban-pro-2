@@ -49,5 +49,18 @@
     "alfabetico": "Alfabetico",
     "progreso": "Progreso",
     "card": "Tarjeta",
-    "dateFormat": "dd/MM/yyyy"
+    "dateFormat": "dd/MM/yyyy",
+    "requiredName": "Nombre es requerido",
+    "requiredDescription": "Descripcion es requerida",
+    "oneMemberRequired": "Debe haber al menos un miembro",
+    "dateOld": "La fecha debe ser mayor a la fecha actual",
+    "name": "Nombre",
+    "proyectName": "Nombre del proyecto",
+    "limitDate": "Fecha limite",
+    "proyectDate": "Fecha limite del proyecto",
+    "description": "Descripcion",
+    "proyectDescription": "Descripcion del proyecto",
+    "members": "Miembros",
+    "cancel": "Cancelar",
+    "createProject": "Crear proyecto"
 }

@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, useMemo } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebaseConfig";
+import { listenUser } from "../services/userService";
 
 import { useInfo } from "./InfoProvider";
 
@@ -9,25 +10,38 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const { addMessage } = useInfo();
 
 
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        let unsubscribeUser = null;
+
+        const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
             if (user) {
                 const isNewUser = user.metadata.creationTime === user.metadata.lastSignInTime;
                 if (!user.emailVerified && !isNewUser) {
                     auth.signOut();
+                    setLoading(false);
                     return;
                 }
-                setUser(user);
+
+                if (unsubscribeUser) unsubscribeUser();
+
+                unsubscribeUser = listenUser(user.uid, (userData) => {
+                    setUser(userData);
+                    setLoading(false);
+                });
             } else {
+                if (unsubscribeUser) unsubscribeUser();
                 setUser(null);
+                setLoading(false);
             }
-            setLoading(false);
         });
-        return unsubscribe;
+
+        return () => {
+            unsubscribeAuth();
+            if (unsubscribeUser) unsubscribeUser();
+        };
     }, []);
 
     const value = useMemo(() => ({
