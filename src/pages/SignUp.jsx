@@ -43,14 +43,12 @@ export const SignUp = ({ isOpen, onClose }) => {
           <SeparatorComponent text={t("continueWithEmail")} />
           <form onSubmit={(e) => {
             handleSignUp(e, onClose);
-          }} className="w-full mb-8">
-            <div>
-              <InputComponent name="name" error={state.signUpErrors.name} Icon={UserIcon} label={t("completeName")} placeholder={t("completeName")} type="text" value={state.auth.name} onChange={handleChange} />
-              <InputComponent name="email" error={state.signUpErrors.email} Icon={EnvelopeIcon} label={t("email")} placeholder={t("emailplaceholder")} type="text" value={state.auth.email} onChange={handleChange} />
-              <InputComponent name="password" error={state.signUpErrors.password} Icon={LockClosedIcon} label={t("password")} placeholder={t("passwordplaceholder")} type="password" value={state.auth.password} onChange={handleChange} />
-              <InputComponent name="passwordConfirmation" error={state.signUpErrors.passwordConfirmation} Icon={ShieldCheckIcon} label={t("passwordConfirmation")} placeholder={t("passwordConfirmation")} type="password" value={state.auth.passwordConfirmation} onChange={handleChange} />
-              <BotonComponent type="submit" text={t("createAccount")} />
-            </div>
+          }} className="w-full mb-8 flex flex-col gap-6">
+            <InputComponent name="name" error={state.signUpErrors.name} Icon={UserIcon} label={t("completeName")} placeholder={t("completeName")} type="text" value={state.auth.name} onChange={handleChange} />
+            <InputComponent name="email" error={state.signUpErrors.email} Icon={EnvelopeIcon} label={t("email")} placeholder={t("emailplaceholder")} type="text" value={state.auth.email} onChange={handleChange} />
+            <InputComponent name="password" error={state.signUpErrors.password} Icon={LockClosedIcon} label={t("password")} placeholder={t("passwordplaceholder")} type="password" value={state.auth.password} onChange={handleChange} />
+            <InputComponent name="passwordConfirmation" error={state.signUpErrors.passwordConfirmation} Icon={ShieldCheckIcon} label={t("passwordConfirmation")} placeholder={t("passwordConfirmation")} type="password" value={state.auth.passwordConfirmation} onChange={handleChange} />
+            <BotonComponent type="submit" text={t("createAccount")} />
           </form>
         </div>
       </div>

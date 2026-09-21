@@ -35,11 +35,9 @@ export const PasswordReset = ({ isOpen, onClose }) => {
                         <h1 className="font-bold text-3xl uppercase text-ui-text">{t("passwordResetTitle")}</h1>
                         <p className="mt-2 text-ui-text-secondary">{t("passwordResetDescription")}</p>
                     </div>
-                    <form onSubmit={(e) => handlePasswordReset(e, onClose)} className="w-full mb-8">
-                        <div>
-                            <InputComponent name="email" error={state.passwordResetErrors.email} Icon={EnvelopeIcon} label={t("email")} placeholder={t("emailplaceholder")} type="email" value={state.auth.email} onChange={handleChange} />
-                            <BotonComponent type="submit" text={t("sendPasswordReset")} />
-                        </div>
+                    <form onSubmit={(e) => handlePasswordReset(e, onClose)} className="w-full mb-8 flex flex-col gap-6">
+                        <InputComponent name="email" error={state.passwordResetErrors.email} Icon={EnvelopeIcon} label={t("email")} placeholder={t("emailplaceholder")} type="email" value={state.auth.email} onChange={handleChange} />
+                        <BotonComponent type="submit" text={t("sendPasswordReset")} />
                     </form>
                 </div>
             </div>

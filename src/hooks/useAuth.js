@@ -55,7 +55,7 @@ export const useAuth = () => {
         dispatch({ type: 'SET_ERRORS_LOGIN', payload: { email: "", password: "" } });
         try {
             const user = await loginWithEmail(state.auth.email, state.auth.password);
-            if (user?.emailVerified) {
+            if (user) {
                 navigate("/");
             } else {
                 addMessage(t("emailVerificationSent"), "info");
@@ -83,7 +83,7 @@ export const useAuth = () => {
             setLoading(true);
             const user = await signUpWithGoogle();
             if (user) {
-                addMessage(t("userCreated"), "success");
+                navigate("/");
             }
         } catch (error) {
             switch (error.code) {
@@ -91,6 +91,7 @@ export const useAuth = () => {
                     addMessage(t("popupClosed"), "error");
                     break;
                 default:
+                    console.log(error);
                     addMessage(t("unexpectedError"), "error");
             }
         } finally {
@@ -103,7 +104,7 @@ export const useAuth = () => {
             setLoading(true);
             const user = await signUpWithGithub();
             if (user) {
-                addMessage(t("userCreated"), "success");
+                navigate("/");
             }
         } catch (error) {
             switch (error.code) {
@@ -111,6 +112,7 @@ export const useAuth = () => {
                     addMessage(t("popupClosed"), "error");
                     break;
                 default:
+                    console.log(error);
                     addMessage(t("unexpectedError"), "error");
             }
         } finally {
